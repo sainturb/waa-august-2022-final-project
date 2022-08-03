@@ -90,7 +90,7 @@
         "id": "92e55806-7d3a-4aa9-a6a5-5229929f0c4b",
         "name": "admin",
         "description": "",
-        "composite": false,
+        "composite": true,
         "clientRole": false,
         "containerId": "879f7a4b-a5bb-4294-8596-eda7725a3689",
         "attributes": {}
@@ -98,9 +98,9 @@
       {
         "id": "5d39f0c6-4f73-4755-8e87-1cfeb22f1433",
         "name": "user",
-        "description": "",
-        "composite": false,
-        "clientRole": false,
+        "description": "${role_default-roles}",
+        "composite": true,
+        "clientRole": true,
         "containerId": "879f7a4b-a5bb-4294-8596-eda7725a3689",
         "attributes": {}
       }
@@ -641,7 +641,7 @@
       "bearerOnly": false,
       "consentRequired": false,
       "standardFlowEnabled": true,
-      "implicitFlowEnabled": false,
+      "implicitFlowEnabled": true,
       "directAccessGrantsEnabled": true,
       "serviceAccountsEnabled": false,
       "publicClient": false,

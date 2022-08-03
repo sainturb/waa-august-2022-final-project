@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
-@RequestMapping("api")
-public class TestController {
+@RequestMapping("admin")
+public class TestAdminController {
 
     @GetMapping("test")
     public String getTest() {
