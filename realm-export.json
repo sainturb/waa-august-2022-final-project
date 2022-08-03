@@ -100,7 +100,7 @@
         "name": "user",
         "description": "${role_default-roles}",
         "composite": true,
-        "clientRole": true,
+        "clientRole": false,
         "containerId": "879f7a4b-a5bb-4294-8596-eda7725a3689",
         "attributes": {}
       }
