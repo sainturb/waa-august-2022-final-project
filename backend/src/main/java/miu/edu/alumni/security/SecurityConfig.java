@@ -1,4 +1,4 @@
-package com.example.demo.security;
+package miu.edu.alumni.security;
 
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;

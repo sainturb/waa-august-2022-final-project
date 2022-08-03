@@ -1,4 +1,4 @@
-package com.example.demo.security;
+package miu.edu.alumni.security;
 
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.springframework.context.annotation.Bean;

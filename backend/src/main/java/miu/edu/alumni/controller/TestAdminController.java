@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package miu.edu.alumni.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;

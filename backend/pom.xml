@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>miu.edu</groupId>
-	<artifactId>final</artifactId>
+	<artifactId>alumni</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>final</name>
+	<name>alumni</name>
 	<description>Student Alumni</description>
 	<properties>
 		<java.version>17</java.version>
