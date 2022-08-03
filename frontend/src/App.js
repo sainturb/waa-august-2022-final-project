@@ -1,27 +1,27 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router";
 import Public from "./public/Public";
 import Private from "./private/Private";
 import {createContext, useContext, useState} from "react";
 import RequireAuth from "./guard/RequireAuth";
 import Callback from "./public/Callback";
+import NotFound from "./public/NotFound";
 
 export const AuthContext = createContext();
 
 function App() {
     return (
         <AuthProvider>
-            <Router>
-                <Routes>
-                    <Route path="/public" element={<Public title={'Public pages'}/>}/>
-                    <Route path="/callback" element={<Callback />}/>
-                    <Route path="/*" element={
-                        <RequireAuth>
-                            <Private/>
-                        </RequireAuth>
-                    }/>
-                </Routes>
-            </Router>
+            <Routes>
+                <Route path="/public" element={<Public title={'Public pages'}/>}/>
+                <Route path="/callback" element={<Callback />}/>
+                <Route path="/*" element={
+                    <RequireAuth>
+                        <Private/>
+                    </RequireAuth>
+                }/>
+                <Route path="*" element={<NotFound/>}/>
+            </Routes>
         </AuthProvider>
     );
 }

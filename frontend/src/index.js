@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
-
+import { BrowserRouter as Router } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 axios.defaults.baseURL = 'http://localhost:8080';
 axios.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
@@ -19,7 +19,9 @@ axios.interceptors.request.use(function (config) {
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+        <App />
+    </Router>
   </React.StrictMode>
 );
 
