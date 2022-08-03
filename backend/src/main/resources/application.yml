@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/alumni_db
     username: postgres
     password: postgres
 
@@ -24,3 +24,10 @@ server:
   port: 8080
   error:
     include-message: always
+
+keycloak:
+  auth-server-url: http://localhost:8081/auth
+  realm: alumni
+  resource: alumni
+  public-client: true
+  principal-attribute: preferred_username

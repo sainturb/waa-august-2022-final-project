@@ -4,7 +4,7 @@ import {useAuth} from "../App";
 
 const client = 'alumni';
 const secret = 'g6saFtjcfpIA1wfG7AEvQpABsJf2y19e';
-const url = `http://localhost:8081/auth/realms/${client}/protocol/openid-connect/auth?response_type=token&client_id=${client}&redirect_uri=http://localhost:3000/check-point`
+const url = `http://localhost:8081/auth/realms/${client}/protocol/openid-connect/auth?response_type=token&client_id=${client}&redirect_uri=http://localhost:3000/callback`
 
 function RequireAuth({ children, ...rest }) {
     let auth = useAuth();
