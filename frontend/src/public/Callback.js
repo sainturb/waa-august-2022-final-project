@@ -1,6 +1,8 @@
 import React, {useEffect} from "react";
+import {useAuth} from "../App";
 
 function Callback () {
+    const auth = useAuth();
     useEffect(() => {
         let paramStrings = window.location.search;
         if (window.location.href.split('#').length > 0) {
@@ -10,7 +12,9 @@ function Callback () {
         queryParams.forEach((value, key) => {
             localStorage.setItem(key, value);
         });
-        window.location.assign('/');
+        auth.signIn(window.atob(queryParams.get('access_token').split('.')[1]), () => {
+            window.location.replace('/');
+        });
     },[])
     return (
         <div>

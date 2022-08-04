@@ -4,7 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
-import { BrowserRouter as Router } from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
+import {Provider} from "react-redux";
+import {x_store} from "./redux/x_store";
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const url = `http://localhost:8081/auth/realms/alumni/protocol/openid-connect/auth?response_type=token&client_id=alumni&redirect_uri=http://localhost:3000/callback`
 axios.defaults.baseURL = 'http://localhost:8080';
@@ -33,9 +36,11 @@ axios.interceptors.response.use(function (response) {
 
 root.render(
   <React.StrictMode>
-    <Router>
-        <App />
-    </Router>
+    <Provider store={x_store}>
+        <Router>
+            <App />
+        </Router>
+    </Provider>
   </React.StrictMode>
 );
 

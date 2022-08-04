@@ -6,6 +6,7 @@ import {createContext, useContext, useState} from "react";
 import RequireAuth from "./guard/RequireAuth";
 import Callback from "./public/Callback";
 import NotFound from "./public/NotFound";
+import RequireUserRole from "./guard/RequireUserRole";
 
 export const AuthContext = createContext();
 
@@ -16,9 +17,11 @@ function App() {
                 <Route path="/public" element={<Public title={'Public pages'}/>}/>
                 <Route path="/callback" element={<Callback />}/>
                 <Route path="/*" element={
-                    <RequireAuth>
-                        <Private/>
-                    </RequireAuth>
+                    <RequireUserRole>
+                        <RequireAuth>
+                            <Private/>
+                        </RequireAuth>
+                    </RequireUserRole>
                 }/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
@@ -27,8 +30,8 @@ function App() {
 }
 
 function AuthProvider({children}) {
-    let [user, setUser] = useState(null);
-    let [token, setToken] = useState(localStorage.getItem('access_token'));
+    const token = localStorage.getItem('access_token');
+    let [user, setUser] = useState(token ? window.atob(token.split('.')[1]) : null);
     let signIn = (newUser, callback) => {
         setUser(newUser);
         return callback();
@@ -36,11 +39,11 @@ function AuthProvider({children}) {
 
     let signOut = (callback) => {
         setUser(null);
-        localStorage.removeItem('access_token');
+        localStorage.clear();
         return callback();
     };
 
-    let value = {user, token, signIn, signOut};
+    let value = {user, signIn, signOut};
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

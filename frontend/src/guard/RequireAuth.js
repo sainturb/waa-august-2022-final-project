@@ -5,7 +5,7 @@ const url = `http://localhost:8081/auth/realms/alumni/protocol/openid-connect/au
 
 function RequireAuth({ children, ...rest }) {
     let auth = useAuth();
-    if (!auth.token) {
+    if (!auth.user) {
         window.location.href = url;
         return null;
     }
