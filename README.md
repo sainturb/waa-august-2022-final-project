@@ -48,7 +48,7 @@ Create dashboard pages for students and faculty:
 *   All delete operations should be a soft deletion.
 * Log all user activities on the system.
 	* Optional: Log data before/after for update operations.
-* Limit login attempts. If a user try to login with an invalid password more than 5 times, the system will lock the user and make it unable to login for 15 minutes.
+* ✅ (Completed) Limit login attempts. If a user try to login with an invalid password more than 5 times, the system will lock the user and make it unable to login for 15 minutes.
 
 
 #### OTP

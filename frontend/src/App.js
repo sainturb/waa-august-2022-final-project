@@ -6,7 +6,7 @@ import {createContext, useContext, useState} from "react";
 import RequireAuth from "./guard/RequireAuth";
 import Callback from "./public/Callback";
 import NotFound from "./public/NotFound";
-import RequireUserRole from "./guard/RequireUserRole";
+import LoggedOut from "./public/LoggedOut";
 
 export const AuthContext = createContext();
 
@@ -15,13 +15,12 @@ function App() {
         <AuthProvider>
             <Routes>
                 <Route path="/public" element={<Public title={'Public pages'}/>}/>
-                <Route path="/callback" element={<Callback />}/>
+                <Route path="/callback" element={<Callback/>}/>
+                <Route path="/logged-out" element={<LoggedOut/>}/>
                 <Route path="/*" element={
-                    <RequireUserRole>
-                        <RequireAuth>
-                            <Private/>
-                        </RequireAuth>
-                    </RequireUserRole>
+                    <RequireAuth>
+                        <Private/>
+                    </RequireAuth>
                 }/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
@@ -32,18 +31,24 @@ function App() {
 function AuthProvider({children}) {
     const token = localStorage.getItem('access_token');
     let [user, setUser] = useState(token ? window.atob(token.split('.')[1]) : null);
-    let signIn = (newUser, callback) => {
-        setUser(newUser);
+    let signIn = (callback) => {
+        if (token) {
+            setUser(window.atob(token.split('.')[1]));
+        }
         return callback();
     };
 
-    let signOut = (callback) => {
-        setUser(null);
+    let signOut = () => {
         localStorage.clear();
-        return callback();
+        setUser(null);
     };
 
-    let value = {user, signIn, signOut};
+    let redirectSignOut = () => {
+        const idToken = localStorage.getItem('id_token');
+        window.location.href = process.env.REACT_APP_LOGOUT_URL + '&id_token_hint=' + idToken;
+    }
+
+    let value = {user, redirectSignOut, signIn, signOut};
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

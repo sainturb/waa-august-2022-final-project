@@ -9,7 +9,6 @@ import {Provider} from "react-redux";
 import {x_store} from "./redux/x_store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const url = `http://localhost:8081/auth/realms/alumni/protocol/openid-connect/auth?response_type=token&client_id=alumni&redirect_uri=http://localhost:3000/callback`
 axios.defaults.baseURL = 'http://localhost:8080';
 axios.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
 axios.interceptors.request.use(function (config) {
@@ -29,7 +28,7 @@ axios.interceptors.response.use(function (response) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     if (error.response.status === 401) {
-        window.location.assign(url);
+        window.location.assign(process.env.REACT_APP_AUTH_URL);
     }
     return Promise.reject(error);
 });
