@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -15,10 +14,12 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @Column(unique = true)
     private String email;
     private String firstName;
     private String lastname;
-    private UUID userId;
-    private Boolean active = true;
+    @Column(unique = true)
+    private String userId;
+    private Boolean is_delete = false;
     private Instant LastLoggedInAt;
 }

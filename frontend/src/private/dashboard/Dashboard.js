@@ -2,7 +2,7 @@ import React from 'react';
 function Dashboard () {
     return (
         <div>
-            Dashboard;
+            <div className="text-xl font-bold mb-2">Dashboard</div>
         </div>
     )
 }
