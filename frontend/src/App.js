@@ -7,7 +7,6 @@ import RequireAuth from "./guard/RequireAuth";
 import Callback from "./public/Callback";
 import NotFound from "./public/NotFound";
 import LoggedOut from "./public/LoggedOut";
-import axios from "axios";
 
 export const AuthContext = createContext();
 

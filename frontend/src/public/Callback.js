@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useAuth} from "../App";
-import {useNavigate, useParams} from "react-router";
+import {useNavigate} from "react-router";
 
 function Callback () {
     const auth = useAuth();

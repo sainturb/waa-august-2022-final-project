@@ -20,7 +20,6 @@ function Private () {
         error => {
             const {status} = error.response;
             if (status === 401) {
-                console.log('401')
                 logout();
             }
             return Promise.reject(error);

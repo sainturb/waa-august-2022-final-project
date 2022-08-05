@@ -1,6 +1,6 @@
-import React, {useContext, useEffect} from "react";
-import {AuthContext, useAuth} from "../App";
-import {useNavigate, useParams} from "react-router";
+import React, {useEffect} from "react";
+import {useAuth} from "../App";
+import {useNavigate} from "react-router";
 
 function LoggedOut () {
     const auth = useAuth();
