@@ -33,10 +33,10 @@ Create dashboard pages for students and faculty:
 * Faculty can write comments on students.
 	* Only faculty can see the comments.
 * Students can add their professional job experiences.
-*  Admin can Activate/Deactivate students and faculty.
-* Admin can reset passwords.
+* ✅ (Keycloak) Admin can Activate/Deactivate students and faculty.
+* ✅ (Keycloak) Admin can reset passwords.
 * Students and faculty can reset their password.
-	* Users should follow a password reset link.
+	* ✅ (Keycloak)Users should follow a password reset link.
 * Use [ECharts](https://echarts.apache.org/en/index.html) to create live charts for dashboards:
 	* Number of job advertisements per location. 
 	* Number of students per state.
