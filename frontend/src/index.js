@@ -21,13 +21,11 @@ axios.interceptors.request.use(function (config) {
 });
 
 root.render(
-  <React.StrictMode>
     <Provider store={x_store}>
         <Router>
             <App />
         </Router>
     </Provider>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
