@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import axios from "axios";
 
 function Faculty() {
@@ -45,9 +46,22 @@ function Faculty() {
         setFilter({...filter, [event.target.name]: event.target.value});
     }
 
+    const onDelete = (faculty) => {
+        const yes = window.confirm('Do you want to continue this action?');
+        if (yes) {
+            axios.delete('/api/faculties/' + faculty.id).then(res => {
+                console.log(res);
+                alert('deleted');
+            });
+        }
+    }
+
     useEffect(() => {
         fetch();
     }, [])
+
+
+
     return (
         <div>
             <div className="text-xl font-bold mb-2">Faculty</div>
@@ -105,10 +119,7 @@ function Faculty() {
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="py-3 px-6">
-                            Firstname
-                        </th>
-                        <th scope="col" className="py-3 px-6">
-                            Lastname
+                            Fullname
                         </th>
                         <th scope="col" className="py-3 px-6">
                             Email
@@ -126,6 +137,9 @@ function Faculty() {
                             Department
                         </th>
                         <th scope="col" className="py-3 px-6">
+                            Deleted
+                        </th>
+                        <th scope="col" className="py-3 px-6">
                             <span className="sr-only">Edit</span>
                         </th>
                     </tr>
@@ -138,11 +152,8 @@ function Faculty() {
                                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row"
                                         className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {faculty.firstName}
+                                        {faculty.firstName} {faculty.lastname}
                                     </th>
-                                    <td className="py-4 px-6">
-                                        {faculty.lastname}
-                                    </td>
                                     <td className="py-4 px-6">
                                         {faculty.email}
                                     </td>
@@ -158,9 +169,15 @@ function Faculty() {
                                     <td className="py-4 px-6">
                                         {faculty.department}
                                     </td>
+                                    <td className="py-4 px-6">
+                                        {faculty.is_deleted ? (<span className="font-medium text-gray-600 dark:text-gray-500 ">Deleted</span>) : (<span className="font-medium text-blue-600 dark:text-blue-500 ">Active</span>)}
+                                    </td>
                                     <td className="py-4 px-6 text-right">
-                                        <a href="#"
-                                           className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        <Link to={'faculty/' + faculty.id}
+                                           className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                                        <button
+                                            onClick={() => onDelete(faculty)}
+                                           className="font-medium  ml-2 text-orange-600 dark:text-orange-500 hover:underline">Delete</button>
                                     </td>
                                 </tr>
                             )
