@@ -158,7 +158,7 @@ function Student () {
                                         {student.gpa}
                                     </td>
                                     <td className="py-4 px-6">
-                                        {student.is_deleted ? (<span className="font-medium text-gray-600 dark:text-gray-500 ">Deleted</span>) : (<span className="font-medium text-blue-600 dark:text-blue-500 ">Active</span>)}
+                                        {student.is_deleted ? (<span className="font-medium text-gray-600 dark:text-gray-500 ">Deleted</span>) : (<span className="font-medium text-green-600 dark:text-green-500 ">Active</span>)}
                                     </td>
                                     <td className="py-4 px-6 text-right">
                                         <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>

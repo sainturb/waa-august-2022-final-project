@@ -170,7 +170,7 @@ function Faculty() {
                                         {faculty.department}
                                     </td>
                                     <td className="py-4 px-6">
-                                        {faculty.is_deleted ? (<span className="font-medium text-gray-600 dark:text-gray-500 ">Deleted</span>) : (<span className="font-medium text-blue-600 dark:text-blue-500 ">Active</span>)}
+                                        {faculty.is_deleted ? (<span className="font-medium text-gray-600 dark:text-gray-500 ">Deleted</span>) : (<span className="font-medium text-green-600 dark:text-green-500 ">Active</span>)}
                                     </td>
                                     <td className="py-4 px-6 text-right">
                                         <Link to={'faculty/' + faculty.id}
