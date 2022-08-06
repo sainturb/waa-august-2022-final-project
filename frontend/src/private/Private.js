@@ -20,7 +20,8 @@ function Private () {
         error => {
             const {status} = error.response;
             if (status === 401) {
-                logout();
+                // logout();
+                auth.redirectSignIn();
             }
             return Promise.reject(error);
         }
