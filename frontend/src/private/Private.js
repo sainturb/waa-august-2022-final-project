@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link, Route, Routes} from "react-router-dom";
 import Dashboard from "./dashboard/Dashboard";
 import Student from "./student/Student";
@@ -8,9 +8,14 @@ import History from "./history/History";
 import {useAuth} from "../App";
 import Profile from "./profile/Profile";
 import Search from "./search/Search";
+import NotFound from "../public/NotFound";
 import axios from "axios";
+import Navbar from '../public/Navbar';
+
 
 function Private () {
+    const [titleState, setTitleState] = useState('Default Title');
+
     const auth = useAuth();
     const logout = () => {
         auth.redirectSignOut();
@@ -25,9 +30,12 @@ function Private () {
             return Promise.reject(error);
         }
     );
+
+    const logoutBtn = (<button className='rounded-md bg-white text-black hover:bg-red-50 active:bg-red-100 w-24 h-8 mt-2' onClick={() => logout()}>Logout</button>);
     return (
         <>
             <div className="container mx-auto">
+                <Navbar title={titleState} navLeft={logoutBtn} />
                 <div className="flex flex-row flex-wrap py-4">
                     <aside className="w-full sm:w-1/3 md:w-1/4 px-2">
                         <div className="sticky top-0 p-4 w-full">
@@ -69,6 +77,7 @@ function Private () {
                             <Route path={'faculty'} element={<Faculty />}></Route>
                             <Route path={'ads'} element={<Ads />}></Route>
                             <Route path={'history'} element={<History />}></Route>
+                            <Route path="*" element={<NotFound/>}/>
                         </Routes>
                     </main>
                 </div>
