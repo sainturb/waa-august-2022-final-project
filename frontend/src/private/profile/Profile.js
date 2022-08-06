@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useAuth} from "../../App";
 import axios from "axios";
+import {STATES} from "../../constants/States";
 
 function Profile() {
     const auth = useAuth();
+    const states = STATES;
     const [message, setMessage] = useState(null);
     const [user, setUser] = useState({
         id: null,
@@ -12,6 +14,10 @@ function Profile() {
         lastname: auth.user.lastname,
         email: auth.user.email,
         userId: auth.user.id,
+        city: null,
+        address: null,
+        state: null,
+        zipCode: null,
         active: true
     });
 
@@ -36,7 +42,13 @@ function Profile() {
         if (user.personType) {
             axios.get(`/api/users/${user.personType}/${user.userId}`).then(response => {
                 if (response.data) {
-                    setUser({...user, id: response.data.id});
+                    setUser({...user,
+                        id: response.data.id,
+                        zipCode: response.data.zipCode,
+                        address: response.data.address,
+                        state: response.data.state,
+                        city: response.data.city,
+                    });
                 }
             });
         }
@@ -110,12 +122,19 @@ function Profile() {
                         <div>
                             <label
                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">State</label>
-                            <input type="text"
-                                   name={'state'}
-                                   value={user.state}
-                                   onChange={(event) => onChange(event)}
-                                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   placeholder="State" required/>
+                            <select name={'state'}
+                                    value={user.state}
+                                    onChange={(event) => onChange(event)}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option>Choose the state</option>
+                                {
+                                    states.map(state => {
+                                        return (
+                                            <option value={state.name}>{state.name}</option>
+                                        )
+                                    })
+                                }
+                            </select>
                         </div>
                         <div>
                             <label
