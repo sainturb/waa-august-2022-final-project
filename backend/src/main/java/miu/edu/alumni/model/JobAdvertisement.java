@@ -17,7 +17,7 @@ public class JobAdvertisement {
 
     @OneToMany(mappedBy="advertisement")
     private List<Tag> tags;
-    @OneToMany(mappedBy="advertisement")
-    private List<File> files;
+    @OneToMany(mappedBy = "advertisement")
+    private List<FileEntity> files;
 
 }
