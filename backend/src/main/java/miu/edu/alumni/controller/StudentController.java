@@ -6,6 +6,7 @@ import miu.edu.alumni.service.StudentServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -38,5 +39,15 @@ public class StudentController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
+    }
+
+    @GetMapping("filter")
+    public List<Student> filter(@RequestParam Map<String, Object> params) {
+        return service.filter(params);
+    }
+
+    @GetMapping("query")
+    public List<Student> filter(@RequestParam String search) {
+        return service.query(search);
     }
 }

@@ -10,8 +10,8 @@ Create dashboard pages for students and faculty:
 
 ####  Functional  Requirements
 --- 
-* Faculty/Students can register to the system.
-* Faculty/Students can only edit their own profile information.
+* ✅ (Completed) Faculty/Students can register to the system.
+* ✅ (Completed) Faculty/Students can only edit their own profile information.
 * Students can add job advertisements.
 	* Can upload pictures/files of the job.
 	* Optional: Use cloud services like Amazon S3 or Google Cloud Storage.
@@ -24,19 +24,19 @@ Create dashboard pages for students and faculty:
 	* by city
 	* by companyName.
 * Faculty can filter students:
-	* by state.
-	* by city.
-	* by major.
-	* by name.
+	* ✅ (Completed) by state.
+	* ✅ (Completed) by city.
+	* ✅ (Completed) by major.
+	* ✅ (Completed) by name.
 	* by student id.
 * Auto-complete tags while typing.
 * Faculty can write comments on students.
 	* Only faculty can see the comments.
 * Students can add their professional job experiences.
-*  Admin can Activate/Deactivate students and faculty.
-* Admin can reset passwords.
+* ✅ (Keycloak) Admin can Activate/Deactivate students and faculty.
+* ✅ (Keycloak) Admin can reset passwords.
 * Students and faculty can reset their password.
-	* Users should follow a password reset link.
+	* ✅ (Keycloak)Users should follow a password reset link.
 * Use [ECharts](https://echarts.apache.org/en/index.html) to create live charts for dashboards:
 	* Number of job advertisements per location. 
 	* Number of students per state.
@@ -45,8 +45,8 @@ Create dashboard pages for students and faculty:
 	* Tags with location. 
 	* Average time spent to find a job per gpa range.
 	* Add at least 4 more charts as you see fit.
-*   All delete operations should be a soft deletion.
-* Log all user activities on the system.
+* ✅ (Completed) All delete operations should be a soft deletion.
+* ✅ (Completed) Log all user activities on the system.
 	* Optional: Log data before/after for update operations.
 * ✅ (Completed) Limit login attempts. If a user try to login with an invalid password more than 5 times, the system will lock the user and make it unable to login for 15 minutes.
 

@@ -1,6 +1,8 @@
 package miu.edu.alumni.model;
 
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -20,6 +22,11 @@ public class Person {
     private String lastname;
     @Column(unique = true)
     private String userId;
-    private Boolean is_delete = false;
+    private Boolean is_deleted = false;
     private Instant LastLoggedInAt;
+
+    private String address;
+    private String state;
+    private String city;
+    private String zipCode;
 }

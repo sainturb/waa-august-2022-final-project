@@ -42,12 +42,16 @@ function AuthProvider({children}) {
         setUser(null);
     };
 
+    let redirectSignIn = () => {
+        window.location.href = process.env.REACT_APP_AUTH_URL;
+    }
+
     let redirectSignOut = () => {
         const idToken = localStorage.getItem('id_token');
         window.location.href = process.env.REACT_APP_LOGOUT_URL + '&id_token_hint=' + idToken;
     }
 
-    let value = {user, redirectSignOut, signIn, signOut};
+    let value = {user, redirectSignIn, redirectSignOut, signIn, signOut};
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
