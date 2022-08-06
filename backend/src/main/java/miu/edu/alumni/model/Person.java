@@ -22,4 +22,9 @@ public class Person {
     private String userId;
     private Boolean is_delete = false;
     private Instant LastLoggedInAt;
+
+    private String address;
+    private String state;
+    private String city;
+    private String zipCode;
 }

@@ -2,10 +2,12 @@ package miu.edu.alumni.controller;
 
 import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.model.Faculty;
+import miu.edu.alumni.model.Student;
 import miu.edu.alumni.service.FacultyServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -39,5 +41,15 @@ public class FacultyController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
+    }
+
+    @GetMapping("filter")
+    public List<Faculty> filter(@RequestParam Map<String, Object> params) {
+        return service.filter(params);
+    }
+
+    @GetMapping("query")
+    public List<Faculty> query(@RequestParam String search) {
+        return service.query(search);
     }
 }
