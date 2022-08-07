@@ -1,5 +1,6 @@
 package miu.edu.alumni.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;

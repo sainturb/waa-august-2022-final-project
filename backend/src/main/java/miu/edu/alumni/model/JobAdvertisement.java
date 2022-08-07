@@ -1,5 +1,6 @@
 package miu.edu.alumni.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,9 +16,9 @@ public class JobAdvertisement {
     private String description;
     private String benefits;
 
-    @OneToMany(mappedBy="advertisement")
+    @OneToMany(mappedBy="advertisement", fetch = FetchType.LAZY)
     private List<Tag> tags;
-    @OneToMany(mappedBy = "advertisement")
+    @OneToMany(mappedBy = "advertisement", fetch = FetchType.LAZY)
     private List<FileEntity> files;
 
 }
