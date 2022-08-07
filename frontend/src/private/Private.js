@@ -62,10 +62,10 @@ function Private () {
                                 <li className="rounded-md hover:bg-slate-100 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'history'} >History</Link>
                                 </li>
-                                <br/>
-                                <li className="rounded-md hover:bg-red-50 pl-4 pr-4 pt-1 pb-1 w-fit">
-                                    <button className={''} onClick={() => logout()}>Logout</button>
-                                </li>
+                                {/*<br/>*/}
+                                {/*<li className="rounded-md hover:bg-red-50 pl-4 pr-4 pt-1 pb-1 w-fit">*/}
+                                {/*    <button className={''} onClick={() => logout()}>Logout</button>*/}
+                                {/*</li>*/}
                             </ul>
                         </div>
                     </aside>
