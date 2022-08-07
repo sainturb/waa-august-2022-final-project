@@ -3,8 +3,8 @@ import axios from "axios";
 
 function Student () {
     const [students, setStudents] = useState([]);
-    const [search, setSearch] = useState(null);
-    const [filter, setFilter] = useState({state: null, city: null, zipCode: null, major: null, gpa: null});
+    const [search, setSearch] = useState(undefined);
+    const [filter, setFilter] = useState({state: undefined, city: undefined, zipCode: undefined, major: undefined, gpa: undefined});
     const fetch = () => {
         axios.get(`/api/students`).then(response => {
             if (response.data) {
