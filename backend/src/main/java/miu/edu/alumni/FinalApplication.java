@@ -1,5 +1,8 @@
 package miu.edu.alumni;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import miu.edu.alumni.config.CustomAuditAware;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
@@ -25,5 +28,7 @@ public class FinalApplication {
 	}
 
 	@Bean
-	public ModelMapper getModelMapper() { return new ModelMapper(); }
+	public ModelMapper getModelMapper() {
+		return new ModelMapper();
+	}
 }
