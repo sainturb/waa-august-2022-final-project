@@ -1,6 +1,7 @@
 package miu.edu.alumni;
 
 import miu.edu.alumni.config.CustomAuditAware;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -21,4 +22,7 @@ public class FinalApplication {
 	public AuditorAware<String> auditorAware(){
 		return new CustomAuditAware();
 	}
+
+	@Bean
+	public ModelMapper getModelMapper() { return new ModelMapper(); }
 }
