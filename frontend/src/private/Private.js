@@ -41,31 +41,31 @@ function Private () {
                     <aside className="w-full sm:w-1/3 md:w-1/4 px-2">
                         <div className="sticky top-0 p-4 w-full">
                             <ul className="flex flex-col overflow-hidden">
-                                <li className="rounded-md hover:bg-slate-100 pl-4 pr-4 pt-1 pb-1 w-fit">
+                                <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'/'} >Home </Link>
                                 </li>
-                                <li className="rounded-md hover:bg-slate-100 pl-4 pr-4 pt-1 pb-1 w-fit">
+                                <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'profile'} >Profile</Link>
                                 </li>
-                                <li className="rounded-md hover:bg-slate-100 pl-4 pr-4 pt-1 pb-1 w-fit">
+                                <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'search'} >Search Job</Link>
                                 </li>
-                                <li className="rounded-md hover:bg-slate-100 pl-4 pr-4 pt-1 pb-1 w-fit">
+                                <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'student'} >Students</Link>
                                 </li>
-                                <li className="rounded-md hover:bg-slate-100 pl-4 pr-4 pt-1 pb-1 w-fit">
+                                <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'faculty'} >Faculty</Link>
                                 </li>
-                                <li className="rounded-md hover:bg-slate-100 pl-4 pr-4 pt-1 pb-1 w-fit">
+                                <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'ads'} >Ads</Link>
                                 </li>
-                                <li className="rounded-md hover:bg-slate-100 pl-4 pr-4 pt-1 pb-1 w-fit">
+                                <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'history'} >History</Link>
                                 </li>
-                                <br/>
-                                <li className="rounded-md hover:bg-red-50 pl-4 pr-4 pt-1 pb-1 w-fit">
-                                    <button className={''} onClick={() => logout()}>Logout</button>
-                                </li>
+                                {/*<br/>*/}
+                                {/*<li className="rounded-md hover:bg-red-50 pl-4 pr-4 pt-1 pb-1 w-fit">*/}
+                                {/*    <button className={''} onClick={() => logout()}>Logout</button>*/}
+                                {/*</li>*/}
                             </ul>
                         </div>
                     </aside>

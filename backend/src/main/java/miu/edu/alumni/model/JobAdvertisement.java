@@ -1,5 +1,6 @@
 package miu.edu.alumni.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.springframework.boot.convert.DataSizeUnit;
 
@@ -26,9 +27,9 @@ public class JobAdvertisement {
     private double salary;
     private LocalDateTime posted;
 
-    @OneToMany(mappedBy="advertisement")
+    @OneToMany(mappedBy="advertisement", fetch = FetchType.LAZY)
     private List<Tag> tags;
-    @OneToMany(mappedBy="advertisement")
-    private List<File> files;
+    @OneToMany(mappedBy = "advertisement", fetch = FetchType.LAZY)
+    private List<FileEntity> files;
 
 }

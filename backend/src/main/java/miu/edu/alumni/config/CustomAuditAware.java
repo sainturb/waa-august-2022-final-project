@@ -5,6 +5,7 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.security.Principal;
 import java.util.Optional;
 
 public class CustomAuditAware implements AuditorAware<String> {
@@ -16,7 +17,12 @@ public class CustomAuditAware implements AuditorAware<String> {
         if (authentication == null || !authentication.isAuthenticated()) {
             return Optional.empty();
         }
-        KeycloakPrincipal principal = (KeycloakPrincipal) authentication.getPrincipal();
-        return Optional.ofNullable(principal.getName());
+        try {
+            KeycloakPrincipal principal = (KeycloakPrincipal) authentication.getPrincipal();
+            return Optional.ofNullable(principal.getName());
+        } catch (Exception e) {
+            return Optional.of("Anonymous");
+        }
+
     }
 }

@@ -4,8 +4,8 @@ import axios from "axios";
 
 function Faculty() {
     const [faculties, setFaculties] = useState([]);
-    const [search, setSearch] = useState(null);
-    const [filter, setFilter] = useState({state: null, city: null, zipCode: null, department: null});
+    const [search, setSearch] = useState(undefined);
+    const [filter, setFilter] = useState({state: undefined, city: undefined, zipCode: undefined, department: undefined});
     const fetch = () => {
         axios.get(`/api/faculties`).then(response => {
             if (response.data) {
