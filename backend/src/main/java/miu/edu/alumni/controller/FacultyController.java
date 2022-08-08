@@ -28,7 +28,7 @@ public class FacultyController {
     }
 
     @PostMapping
-    public Faculty save(Faculty faculty) {
+    public Faculty save(@RequestBody Faculty faculty) {
         return service.save(faculty);
     }
 

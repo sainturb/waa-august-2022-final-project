@@ -11,6 +11,7 @@ import Search from "./search/Search";
 import NotFound from "../public/NotFound";
 import axios from "axios";
 import Navbar from '../public/Navbar';
+import MyHistory from "./history/MyHistory";
 
 
 function Private () {
@@ -48,6 +49,9 @@ function Private () {
                                     <Link to={'profile'} >Profile</Link>
                                 </li>
                                 <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
+                                    <Link to={'my-jobs'} >My Jobs</Link>
+                                </li>
+                                <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'search'} >Search Job</Link>
                                 </li>
                                 <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
@@ -74,6 +78,7 @@ function Private () {
                             <Route path={'/'} element={<Dashboard />}></Route>
                             <Route path={'search'} element={<Search />}></Route>
                             <Route path={'profile'} element={<Profile />}></Route>
+                            <Route path={'my-jobs'} element={<MyHistory />}></Route>
                             <Route path={'student'} element={<Student />}></Route>
                             <Route path={'faculty'} element={<Faculty />}></Route>
                             <Route path={'ads'} element={<Ads />}></Route>

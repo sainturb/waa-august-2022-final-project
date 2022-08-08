@@ -28,7 +28,6 @@ function Student () {
                 params[key] = filter[key];
             }
         });
-        console.log(params);
         axios.get(`/api/students/filter`, {params}).then(response => {
             if (response.data) {
                 setStudents(response.data);

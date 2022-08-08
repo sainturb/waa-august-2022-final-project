@@ -71,7 +71,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     static Specification<Student> valueEquals(String property, Object value) {
-        return (student, cq, cb) -> cb.equal(student.get("lastname"), value);
+        return (student, cq, cb) -> cb.equal(student.get(property), value);
     }
 }
 
