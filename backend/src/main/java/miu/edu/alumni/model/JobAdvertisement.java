@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -26,7 +25,7 @@ public class JobAdvertisement {
     private Double salary;
     private Instant posted;
 
-    @OneToMany(mappedBy="advertisement", fetch = FetchType.LAZY)
+    @ManyToMany()
     private List<Tag> tags;
     @OneToMany(mappedBy = "advertisement", fetch = FetchType.LAZY)
     private List<FileEntity> files;

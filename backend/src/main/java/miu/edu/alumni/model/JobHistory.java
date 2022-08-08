@@ -39,6 +39,6 @@ public class JobHistory {
     @OneToMany(mappedBy = "history", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "history", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags;
 }

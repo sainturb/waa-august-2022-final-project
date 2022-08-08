@@ -1,9 +1,9 @@
 package miu.edu.alumni.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -12,13 +12,11 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String tag;
+    private String name;
 
-    @ManyToOne
-    @JoinColumn(name="advertisement_id")
-    private JobAdvertisement advertisement;
+    @ManyToMany(mappedBy="tags")
+    private List<JobAdvertisement> advertisements;
 
-    @ManyToOne
-    @JoinColumn(name="history_id")
-    private JobHistory history;
+    @ManyToMany(mappedBy="tags")
+    private List<JobHistory> histories;
 }

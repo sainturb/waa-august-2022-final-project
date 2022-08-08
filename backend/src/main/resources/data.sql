@@ -22,3 +22,30 @@ INSERT INTO job_advertisement(company, state, city, benefit, description, posted
 VALUES('IBM', 'TX','Austin','401k', 'Traject Data powers business insights for many household internet brands and trendsetters in the digital marketing space. We’re looking to add a backend engineer to our team. This is the perfect opportunity for you if you are passionate about building solutions with modern cloud and data technologies and are interested in working in the digital marketing | SEO space. The ideal candidate is a capable backend engineer that can demonstrate prior experience building and scaling cloud-native data-centric applications specifically using Node.js, AWS and MYSQL.', '2022-07-08 17:22:49.828', 140000, 'Backend Engineer');
 INSERT INTO job_advertisement(company, state, city, benefit, description, posted, salary, title)
 VALUES('Woongjin Inc', 'NJ','Ridgefield Park','401k', 'Signify Technology is partnered with a client who is seeking a Frontend Software Developer to join their team! Successful candidates will have the ability to make an immediate impact in delivering highly scalable solutions as our client continues to expand their userbase and service offerings.', '2022-07-08 18:22:49.828', 200000, 'Frontend Developer');
+
+INSERT INTO tag("name")VALUES('javascript');
+INSERT INTO tag("name")VALUES('java');
+INSERT INTO tag("name")VALUES('front-end');
+INSERT INTO tag("name")VALUES('back-end');
+INSERT INTO tag("name")VALUES('rest-api');
+INSERT INTO tag("name")VALUES('python');
+INSERT INTO tag("name")VALUES('security');
+INSERT INTO tag("name")VALUES('ux-ui');
+INSERT INTO tag("name")VALUES('web-development');
+INSERT INTO tag("name")VALUES('react');
+INSERT INTO tag("name")VALUES('spring-boot');
+
+
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(1,1);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(1,3);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(2,1);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(2,5);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(2,8);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(2,4);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(2,2);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(3,1);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(3,3);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(3,8);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(3,10);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(4,2);
+INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(4,5);

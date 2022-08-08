@@ -2,7 +2,6 @@ package miu.edu.alumni.service;
 
 import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.model.Faculty;
-import miu.edu.alumni.model.Student;
 import miu.edu.alumni.repository.FacultyRepository;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.springframework.data.jpa.domain.Specification;

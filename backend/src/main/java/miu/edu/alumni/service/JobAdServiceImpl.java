@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class JobAdServiceImpl implements JobAdService{
+public class JobAdServiceImpl implements JobAdService {
 
     @Autowired
     private JobAdvertisementRepository jobAdRepo;
@@ -67,4 +67,10 @@ public class JobAdServiceImpl implements JobAdService{
     static Specification<JobAdvertisement> valueEquals(String property, Object value) {
         return (ad, cq, cb) -> cb.equal(ad.get(property), value);
     }
+
+//    private JobAdvertisement convertToDto(JobAdvertisement jobAd) {
+//        var jobAd = modelMapper.map(jobAd, JobAdvertisement.class);
+//        jobAd.setTags(jobAd.getTags().stream().map(t -> modelMapper.map(t, TagDto.class)).collect(Collectors.toList()));
+//        return jobAd;
+//    }
 }
