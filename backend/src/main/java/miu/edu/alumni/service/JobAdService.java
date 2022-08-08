@@ -1,16 +1,15 @@
 package miu.edu.alumni.service;
 
-import miu.edu.alumni.dto.JobAdvertisementDto;
 import miu.edu.alumni.model.JobAdvertisement;
 
 import java.util.List;
 import java.util.Map;
 
 public interface JobAdService {
-    public JobAdvertisementDto save(JobAdvertisementDto jobAdDto);
-    public List<JobAdvertisementDto> findAll();
-    public JobAdvertisementDto update(JobAdvertisementDto jobAdDto);
-    public JobAdvertisementDto deleteById(long jobAdId);
-    public List<JobAdvertisementDto> filter(Map<String, Object> params);
-    public List<JobAdvertisementDto> search(String query);
+   JobAdvertisement save(JobAdvertisement jobAd);
+   List<JobAdvertisement> findAll();
+   JobAdvertisement update(JobAdvertisement jobAd);
+   void deleteById(long jobAdId);
+   List<JobAdvertisement> filter(Map<String, Object> params);
+   List<JobAdvertisement> search(String query);
 }

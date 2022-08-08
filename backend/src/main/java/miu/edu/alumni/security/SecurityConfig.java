@@ -43,6 +43,7 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/download/**").permitAll()
+                .antMatchers("/api/advertisements/**").hasRole("faculty")
                 .antMatchers("/api/**").authenticated()
                 .anyRequest()
                 .authenticated();

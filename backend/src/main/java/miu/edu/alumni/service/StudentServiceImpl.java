@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.model.Faculty;
 import miu.edu.alumni.model.Student;
 import miu.edu.alumni.repository.StudentRepository;
+import org.keycloak.representations.idm.RoleRepresentation;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository repository;
+    private final KeycloakService keycloak;
 
     @Override
     public List<Student> findAll() {
@@ -34,7 +36,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student save(Student student) {
-        return repository.save(student);
+        Student created = repository.save(student);
+        RoleRepresentation roleRepresentation = keycloak.findRoleByName("student");
+        keycloak.assignRole(student.getUserId(), roleRepresentation);
+        return created;
     }
 
     @Override

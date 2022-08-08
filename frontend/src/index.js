@@ -10,7 +10,7 @@ import {x_store} from "./redux/x_store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 axios.defaults.baseURL = 'http://localhost:8080';
-axios.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.interceptors.request.use(function (config) {
     if (localStorage.getItem('access_token')) {
         config.headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;

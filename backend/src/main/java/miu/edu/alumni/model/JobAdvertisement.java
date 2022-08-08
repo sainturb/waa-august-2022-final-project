@@ -1,10 +1,9 @@
 package miu.edu.alumni.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import org.springframework.boot.convert.DataSizeUnit;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,8 +23,8 @@ public class JobAdvertisement {
     private String state;
     private String city;
     private String company;
-    private double salary;
-    private LocalDateTime posted;
+    private Double salary;
+    private Instant posted;
 
     @OneToMany(mappedBy="advertisement", fetch = FetchType.LAZY)
     private List<Tag> tags;

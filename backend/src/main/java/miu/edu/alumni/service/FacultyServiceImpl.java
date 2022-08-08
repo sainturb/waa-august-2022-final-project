@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.model.Faculty;
 import miu.edu.alumni.model.Student;
 import miu.edu.alumni.repository.FacultyRepository;
+import org.keycloak.representations.idm.RoleRepresentation;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class FacultyServiceImpl implements FacultyService {
 
     private final FacultyRepository repository;
+    private final KeycloakService keycloak;
 
     @Override
     public List<Faculty> findAll() {
@@ -34,7 +36,10 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public Faculty save(Faculty faculty) {
-        return repository.save(faculty);
+        Faculty created = repository.save(faculty);
+        RoleRepresentation roleRepresentation = keycloak.findRoleByName("faculty");
+        keycloak.assignRole(faculty.getUserId(), roleRepresentation);
+        return created;
     }
 
     @Override

@@ -1,8 +1,8 @@
 package miu.edu.alumni.controller;
 
 import lombok.RequiredArgsConstructor;
-import miu.edu.alumni.dto.JobAdvertisementDto;
-import miu.edu.alumni.service.JobAdService;
+import miu.edu.alumni.model.JobAdvertisement;
+import miu.edu.alumni.service.JobAdServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,36 +13,36 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JobAdController {
 
-    private final JobAdService jobAdService;
+    private final JobAdServiceImpl jobAdService;
 
     @PostMapping
-    public JobAdvertisementDto save(@RequestBody JobAdvertisementDto jobAdDto) {
-        return jobAdService.save(jobAdDto);
+    public JobAdvertisement save(@RequestBody JobAdvertisement jobAd) {
+        return jobAdService.save(jobAd);
     }
 
     @GetMapping
-    public List<JobAdvertisementDto> findAll() {
+    public List<JobAdvertisement> findAll() {
         return jobAdService.findAll();
     }
 
     @PutMapping("/{id}")
-    public JobAdvertisementDto update(@PathVariable long id, @RequestBody JobAdvertisementDto jobAdDto) {
-        jobAdDto.setId(id);
-        return jobAdService.update(jobAdDto);
+    public JobAdvertisement update(@PathVariable long id, @RequestBody JobAdvertisement jobAd) {
+        jobAd.setId(id);
+        return jobAdService.update(jobAd);
     }
 
     @DeleteMapping("/{id}")
-    public JobAdvertisementDto delete(@PathVariable long id){
-        return jobAdService.deleteById(id);
+    public void delete(@PathVariable long id) {
+        jobAdService.deleteById(id);
     }
 
     @GetMapping("filter")
-    public List<JobAdvertisementDto> filter(@RequestParam Map<String, Object> params) {
+    public List<JobAdvertisement> filter(@RequestParam Map<String, Object> params) {
         return jobAdService.filter(params);
     }
 
     @GetMapping("search")
-    public List<JobAdvertisementDto> search(@RequestParam String query) {
+    public List<JobAdvertisement> search(@RequestParam String query) {
         return jobAdService.search(query);
     }
 }
