@@ -11,6 +11,6 @@ public interface JobAdService {
     public List<JobAdvertisementDto> findAll();
     public JobAdvertisementDto update(JobAdvertisementDto jobAdDto);
     public JobAdvertisementDto deleteById(long jobAdId);
-    public List<JobAdvertisementDto> filter(Map<String, Object> params);
+    public List<JobAdvertisementDto> filter(Map<String, String> params);
     public List<JobAdvertisementDto> search(String query);
 }

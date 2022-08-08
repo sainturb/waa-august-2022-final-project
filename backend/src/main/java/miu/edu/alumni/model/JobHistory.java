@@ -20,6 +20,6 @@ public class JobHistory {
     private String reasonToLeave;
     private String comments;
 
-    @OneToMany(mappedBy="history")
+    @ManyToMany
     private List<Tag> tags;
 }

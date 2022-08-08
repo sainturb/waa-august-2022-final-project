@@ -1,12 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
+import ReactTags from 'react-tag-autocomplete'
+
+import './ads.css'
 
 function Ads () {
     const [ads, setAds] = useState([]);
     const [query, setQuery] = useState('');
-    const [filter, setFilter] = useState({state: null, city: null, company: null, tags: null });
+    const [filter, setFilter] = useState({state: null, city: null, company: null });
 
-    const fetch = () => {
+    const [tags, setTags] = useState([]);
+    const [tagSuggestions, setTagSuggestions] = useState([]);
+
+    const fetchAds = () => {
         axios.get('/api/advertisements').then(response => {
             if (response.data) {
                 setAds(response.data);
@@ -31,12 +37,40 @@ function Ads () {
         });
 
         axios.get('/api/advertisements/filter', {params: params}).then(response => {
-            console.log(response);
             if(response.data) {
+                if(tags.length > 0) {
+                    response.data = response.data.filter(a => {
+                        let isFilter = false;
+                        a.tags.forEach(at => {
+                            if(tags.map(t => t.id).includes(at.id)) {
+                                isFilter = true;
+                                return;
+                            }
+                        });
+                        return isFilter;
+                    });
+                }
                 setAds(response.data);
             }
         });
     };
+
+    const fetchTagSuggestions = () => {
+        axios.get('api/tags').then(response => {
+            if(response.data) {
+                setTagSuggestions(response.data);
+            }
+        });
+    };
+
+    const onAddition = (newTag) => {
+        setTags([...tags, newTag]);
+    };
+
+    const onDelete = (tagIndex) => {
+        setTags(tags.filter((_, i) => i !== tagIndex));
+    };
+
 
     const onSearch = (event) => {
         setQuery(event.target.value);
@@ -48,7 +82,8 @@ function Ads () {
     }
 
     useEffect(() => {
-        fetch();
+        fetchAds();
+        fetchTagSuggestions();
     }, [])
 
     return (
@@ -90,7 +125,15 @@ function Ads () {
                         />
                     </div>
                     <div>
-                        <input 
+                        <ReactTags
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            tags={tags}
+                            suggestions={tagSuggestions}
+                            noSuggestionsText="No matching tags"
+                            onAddition={onAddition}
+                            onDelete={onDelete}
+                        />
+                        {/* <input 
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="text"
                             // value={''}
@@ -98,7 +141,7 @@ function Ads () {
                             onChange={(event) => onFilterChange(event)}
                             placeholder="Tags" 
                             required
-                        />
+                        /> */}
                     </div>
                 </div>
                 <button type="button" onClick={() => fetchFilter()}
@@ -176,7 +219,7 @@ function Ads () {
                                         {ad.files}
                                     </td>
                                     <td className="py-4 px-3">
-                                        {ad.tags}
+                                        {ad.tags.map(t => t.name).join(', ')}
                                     </td>
                                 </tr>
                             )
@@ -186,7 +229,7 @@ function Ads () {
                 </table>
             </div>
         </div>
-    )
+    );
 }
 
 export default Ads;

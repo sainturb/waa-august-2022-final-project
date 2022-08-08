@@ -27,7 +27,7 @@ public class JobAdvertisement {
     private double salary;
     private LocalDateTime posted;
 
-    @OneToMany(mappedBy="advertisement", fetch = FetchType.LAZY)
+    @ManyToMany()
     private List<Tag> tags;
     @OneToMany(mappedBy = "advertisement", fetch = FetchType.LAZY)
     private List<FileEntity> files;

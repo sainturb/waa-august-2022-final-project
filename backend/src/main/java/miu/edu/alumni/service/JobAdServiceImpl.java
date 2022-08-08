@@ -2,6 +2,7 @@ package miu.edu.alumni.service;
 
 import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.dto.JobAdvertisementDto;
+import miu.edu.alumni.dto.TagDto;
 import miu.edu.alumni.model.Faculty;
 import miu.edu.alumni.model.JobAdvertisement;
 import miu.edu.alumni.repository.JobAdvertisementRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class JobAdServiceImpl implements JobAdService{
@@ -26,13 +28,13 @@ public class JobAdServiceImpl implements JobAdService{
     public JobAdvertisementDto save(JobAdvertisementDto jobAdDto) {
         var jobAd = modelMapper.map(jobAdDto, JobAdvertisement.class);
         var newJobAd = jobAdRepo.save(jobAd);
-        return newJobAd != null ? modelMapper.map(newJobAd, JobAdvertisementDto.class) : null;
+        return newJobAd != null ? convertToDto(newJobAd) : null;
     }
 
     @Override
     public List<JobAdvertisementDto> findAll() {
         var jobAds = new ArrayList<JobAdvertisementDto>();
-        jobAdRepo.findAll().forEach(j -> jobAds.add(modelMapper.map(j, JobAdvertisementDto.class)));
+        jobAdRepo.findAll().forEach(j -> jobAds.add(convertToDto(j)));
         return jobAds;
     }
 
@@ -48,13 +50,13 @@ public class JobAdServiceImpl implements JobAdService{
         var jobAd = jobAdRepo.findById(jobAdId).orElse(null);
         if(jobAd != null) {
             jobAdRepo.deleteById(jobAdId);
-            return modelMapper.map(jobAd, JobAdvertisementDto.class);
+            return convertToDto(jobAd);
         }
         return null;
     }
 
     @Override
-    public List<JobAdvertisementDto> filter(Map<String, Object> params) {
+    public List<JobAdvertisementDto> filter(Map<String, String> params) {
         var jobAdsDto = new ArrayList<JobAdvertisementDto>();
         List<JobAdvertisement> jobAds;
         if (!params.isEmpty()) {
@@ -66,7 +68,7 @@ public class JobAdServiceImpl implements JobAdService{
         } else {
             jobAds = jobAdRepo.findAll();
         }
-        jobAds.forEach(j -> jobAdsDto.add(modelMapper.map(j, JobAdvertisementDto.class)));
+        jobAds.forEach(j -> jobAdsDto.add(convertToDto(j)));
         return jobAdsDto;
     }
 
@@ -84,7 +86,7 @@ public class JobAdServiceImpl implements JobAdService{
         } else {
             jobAds = jobAdRepo.findAll();
         }
-        jobAds.forEach(j -> jobAdsDto.add(modelMapper.map(j, JobAdvertisementDto.class)));
+        jobAds.forEach(j -> jobAdsDto.add(convertToDto(j)));
         return jobAdsDto;
     }
 
@@ -94,5 +96,11 @@ public class JobAdServiceImpl implements JobAdService{
 
     static Specification<JobAdvertisement> valueEquals(String property, Object value) {
         return (ad, cq, cb) -> cb.equal(ad.get(property), value);
+    }
+
+    private JobAdvertisementDto convertToDto(JobAdvertisement jobAd) {
+        var jobAdDto = modelMapper.map(jobAd, JobAdvertisementDto.class);
+        jobAdDto.setTags(jobAd.getTags().stream().map(t -> modelMapper.map(t, TagDto.class)).collect(Collectors.toList()));
+        return jobAdDto;
     }
 }

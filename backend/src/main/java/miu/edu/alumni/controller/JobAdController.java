@@ -36,13 +36,14 @@ public class JobAdController {
         return jobAdService.deleteById(id);
     }
 
-    @GetMapping("filter")
-    public List<JobAdvertisementDto> filter(@RequestParam Map<String, Object> params) {
+    @GetMapping("/filter")
+    public List<JobAdvertisementDto> filter(@RequestParam Map<String, String> params) {
         return jobAdService.filter(params);
     }
 
-    @GetMapping("search")
+    @GetMapping("/search")
     public List<JobAdvertisementDto> search(@RequestParam String query) {
         return jobAdService.search(query);
     }
+
 }

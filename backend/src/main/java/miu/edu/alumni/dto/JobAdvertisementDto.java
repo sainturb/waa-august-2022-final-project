@@ -3,6 +3,7 @@ package miu.edu.alumni.dto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class JobAdvertisementDto {
@@ -15,4 +16,6 @@ public class JobAdvertisementDto {
     private String company;
     private double salary;
     private LocalDateTime posted;
+
+    private List<TagDto> tags;
 }

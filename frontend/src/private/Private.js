@@ -38,7 +38,7 @@ function Private () {
             <div className="container mx-auto">
                 <Navbar title={titleState} navLeft={logoutBtn} />
                 <div className="flex flex-row flex-wrap py-4">
-                    <aside className="w-full sm:w-1/3 md:w-1/4 px-2">
+                    <aside className="w-full sm:w-1/4 md:w-1/6 px-2">
                         <div className="sticky top-0 p-4 w-full">
                             <ul className="flex flex-col overflow-hidden">
                                 <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
@@ -69,7 +69,7 @@ function Private () {
                             </ul>
                         </div>
                     </aside>
-                    <main role="main" className="w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
+                    <main role="main" className="w-full sm:w-3/4 md:w-5/6 pt-1 px-2">
                         <Routes>
                             <Route path={'/'} element={<Dashboard />}></Route>
                             <Route path={'search'} element={<Search />}></Route>
