@@ -18,21 +18,21 @@ Create dashboard pages for students and faculty:
 * Students can only edit their own job advertisements.
 * Students can apply to the jobs.
 	* Student's CV will be also visible to owners of the job advertisements that the student has applied.
-* Students and Faculty can filter job advertisements:
-	* by tags.
-	* by state.
-	* by city
-	* by companyName.
-* Faculty can filter students:
+* ✅ (Completed) Students and Faculty can filter job advertisements:
+	* ✅ (Completed) by tags.
+	* ✅ (Completed) by state.
+	* ✅ (Completed) by city
+	* ✅ (Completed) by companyName.
+* ✅ (Completed) Faculty can filter students:
 	* ✅ (Completed) by state.
 	* ✅ (Completed) by city.
 	* ✅ (Completed) by major.
 	* ✅ (Completed) by name.
 	* by student id.
-* Auto-complete tags while typing.
+* ✅ (Completed) Auto-complete tags while typing.
 * Faculty can write comments on students.
 	* Only faculty can see the comments.
-* Students can add their professional job experiences.
+* ✅ (Completed) Students can add their professional job experiences.
 * ✅ (Keycloak) Admin can Activate/Deactivate students and faculty.
 * ✅ (Keycloak) Admin can reset passwords.
 * Students and faculty can reset their password.
