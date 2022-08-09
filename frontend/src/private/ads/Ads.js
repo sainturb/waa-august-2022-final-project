@@ -11,7 +11,7 @@ function Ads () {
     const [tagSuggestions, setTagSuggestions] = useState([]);
 
     const fetchAds = () => {
-        axios.get('/api/advertisements').then(response => {
+        axios.get('/api/advertisements/filter').then(response => {
             if (response.data) {
                 setAds(response.data);
             }
@@ -56,13 +56,10 @@ function Ads () {
 
     const onAddition = (newTag) => {
         setFilter({...filter, tags: [...filter.tags, newTag]});
-        console.log(filter);
-        // setTags([...tags, newTag]);
     };
 
     const onDelete = (tagIndex) => {
         setFilter({...filter, tags: filter.tags.filter((_, i) => i !== tagIndex)});
-        // setTags(tags.filter((_, i) => i !== tagIndex));
     };
 
 
@@ -152,7 +149,7 @@ function Ads () {
             </div>
             <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="py-3 px-3">
                             Title
@@ -174,6 +171,9 @@ function Ads () {
                         </th>
                         <th scope="col" className="py-3 px-3">
                             City
+                        </th>
+                        <th scope="col" className="py-3 px-3">
+                            Created by
                         </th>
                         <th scope="col" className="py-3 px-3">
                             Files
@@ -208,6 +208,9 @@ function Ads () {
                                     </td>
                                     <td className="py-4 px-3">
                                         {ad.city}
+                                    </td>
+                                    <td className="py-4 px-3">
+                                        {ad.createdBy}
                                     </td>
                                     <td className="py-4 px-3">
                                         {ad.files}

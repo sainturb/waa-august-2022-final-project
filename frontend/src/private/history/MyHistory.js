@@ -17,7 +17,7 @@ function MyHistory () {
     return (
         <div>
             <div className="text-xl font-bold mb-2">Job History</div>
-            <CreateHistoryDialog fetch={fetch} />
+            <CreateHistoryDialog buttonText={'Create job history'} fetch={fetch} />
             <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -36,6 +36,9 @@ function MyHistory () {
                         </th>
                         <th scope="col" className="py-3 px-6">
                             Comments
+                        </th>
+                        <th scope="col" className="py-3 px-3">
+
                         </th>
                     </tr>
                     </thead>
@@ -58,6 +61,9 @@ function MyHistory () {
                                     </td>
                                     <td className="py-4 px-6">
                                         {record.comments.length}
+                                    </td>
+                                    <td className="py-4 px-6">
+                                        <CreateHistoryDialog buttonText={'Edit'} fetch={fetch} editBody={record}/>
                                     </td>
                                 </tr>
                             )

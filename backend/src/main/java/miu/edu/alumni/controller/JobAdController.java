@@ -2,9 +2,11 @@ package miu.edu.alumni.controller;
 
 import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.model.JobAdvertisement;
+import miu.edu.alumni.model.JobHistory;
 import miu.edu.alumni.service.JobAdServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -36,8 +38,13 @@ public class JobAdController {
         jobAdService.deleteById(id);
     }
 
+    @GetMapping("my")
+    public List<JobAdvertisement> myAll(Principal principal) {
+        return jobAdService.myAll(principal.getName());
+    }
+
     @GetMapping("filter")
-    public List<JobAdvertisement> filter(@RequestParam Map<String, Object> params) {
+    public List<JobAdvertisement> filter(@RequestParam Map<String, Object> params, Principal principal) {
         return jobAdService.filter(params);
     }
 

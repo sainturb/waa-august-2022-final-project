@@ -12,4 +12,6 @@ public interface JobAdService {
    void deleteById(long jobAdId);
    List<JobAdvertisement> filter(Map<String, Object> params);
    List<JobAdvertisement> search(String query);
+
+   List<JobAdvertisement> myAll(String username);
 }

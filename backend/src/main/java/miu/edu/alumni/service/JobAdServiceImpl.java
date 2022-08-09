@@ -1,6 +1,7 @@
 package miu.edu.alumni.service;
 
 import miu.edu.alumni.model.JobAdvertisement;
+import miu.edu.alumni.model.JobHistory;
 import miu.edu.alumni.model.Tag;
 import miu.edu.alumni.repository.JobAdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,13 @@ public class JobAdServiceImpl implements JobAdService {
     @Override
     public void deleteById(long jobAdId) {
         jobAdRepo.deleteById(jobAdId);
+    }
+
+    @Override
+    public List<JobAdvertisement> myAll(String username) {
+        Specification<JobAdvertisement> query = Specification
+                .where(valueEquals("createdBy", username));
+        return jobAdRepo.findAll(query);
     }
 
     @Override
@@ -84,6 +92,10 @@ public class JobAdServiceImpl implements JobAdService {
 
     static Specification<JobAdvertisement> valueEquals(String property, Object value) {
         return (ad, cq, cb) -> cb.equal(ad.get(property), value);
+    }
+
+    static Specification<JobAdvertisement> valueNotEquals(String property, Object value) {
+        return (ad, cq, cb) -> cb.notEqual(ad.get(property), value);
     }
 
 //    private JobAdvertisement convertToDto(JobAdvertisement jobAd) {

@@ -46,6 +46,15 @@ function Student () {
         setFilter({...filter, [event.target.name]: event.target.value});
     }
 
+    const onDelete = (faculty) => {
+        const yes = window.confirm('Do you want to continue this action?');
+        if (yes) {
+            axios.delete('/api/students/' + faculty.id).then(res => {
+                alert('deleted');
+            });
+        }
+    }
+
     useEffect(() => {
         fetch();
     }, [])
@@ -137,7 +146,7 @@ function Student () {
                             Status
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            <span className="sr-only">Edit</span>
+                            <span className="sr-only">Action</span>
                         </th>
                     </tr>
                     </thead>
@@ -171,7 +180,9 @@ function Student () {
                                         {student.is_deleted ? (<span className="font-medium text-gray-600 dark:text-gray-500 ">Deleted</span>) : (<span className="font-medium text-green-600 dark:text-green-500 ">Active</span>)}
                                     </td>
                                     <td className="py-4 px-6 text-right">
-                                        <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        <button
+                                            onClick={() => onDelete(student)}
+                                            className="font-medium  ml-2 text-orange-600 dark:text-orange-500 hover:underline">Delete</button>
                                     </td>
                                 </tr>
                             )

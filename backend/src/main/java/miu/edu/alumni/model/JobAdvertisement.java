@@ -1,6 +1,9 @@
 package miu.edu.alumni.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -8,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@EntityListeners(AuditingEntityListener.class)
 public class JobAdvertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +27,10 @@ public class JobAdvertisement {
     private String city;
     private String company;
     private Double salary;
+
+    @CreatedBy
+    private String createdBy;
+    @CreatedDate
     private Instant posted;
 
     @ManyToMany()
