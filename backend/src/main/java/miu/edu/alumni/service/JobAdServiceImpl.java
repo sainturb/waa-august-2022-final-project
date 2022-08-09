@@ -2,6 +2,7 @@ package miu.edu.alumni.service;
 
 import miu.edu.alumni.model.JobAdvertisement;
 import miu.edu.alumni.model.JobHistory;
+import miu.edu.alumni.model.Student;
 import miu.edu.alumni.model.Tag;
 import miu.edu.alumni.repository.JobAdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +10,16 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class JobAdServiceImpl implements JobAdService {
 
     @Autowired
     private JobAdvertisementRepository jobAdRepo;
+
+    @Autowired
+    private StudentServiceImpl studentService;
 
     @Override
     public JobAdvertisement save(JobAdvertisement jobAd) {
@@ -75,6 +76,15 @@ public class JobAdServiceImpl implements JobAdService {
             return jobAdRepo.findAll(specification);
         }
         return jobAdRepo.findAll();
+    }
+
+    @Override
+    public void apply(Long id, Student student) {
+        Optional<JobAdvertisement> optional = jobAdRepo.findById(id);
+        optional.ifPresent(jobAdvertisement -> {
+            jobAdvertisement.getApplied().add(student);
+            save(jobAdvertisement);
+        });
     }
 
     static Specification<JobAdvertisement> valueIn(String property, List<String> tags) {

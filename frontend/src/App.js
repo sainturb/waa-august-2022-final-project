@@ -7,6 +7,7 @@ import RequireAuth from "./guard/RequireAuth";
 import Callback from "./public/Callback";
 import NotFound from "./public/NotFound";
 import LoggedOut from "./public/LoggedOut";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -31,9 +32,12 @@ function App() {
 }
 
 function AuthProvider({children}) {
-    let [user, setUser] = useState(getCurrentUser());
+    let currentUser = getCurrentUser();
+    let [user, setUser] = useState(currentUser);
     let signIn = (callback) => {
-        setUser(getCurrentUser());
+        currentUser = getCurrentUser();
+        setUser(currentUser);
+        axios.post(`/api/users/create-current-user/${currentUser.type}`, currentUser).then(res => {});
         return callback();
     };
 
@@ -65,15 +69,20 @@ export const getCurrentUser = () => {
     if (token) {
         const parsed  = JSON.parse(window.atob(token.split('.')[1]));
         const roles =  parsed.realm_access.roles
-        const role = roles.find(r => r === 'admin') ? roles.find(r => r === 'admin') : roles.find(r => r === 'faculty') ? roles.find(r => r === 'faculty') : roles.find(r => r === 'student') ? roles.find(r => r === 'student') : null;
-        console.log(roles);
-        console.log(role);
+        let role = 'student';
+        if (roles.find(r => r === 'admin')) {
+            role = 'admin';
+        }
+        if (roles.find(r => r === 'faculty')) {
+            role = 'faculty';
+        }
         return {
-            id: parsed.sub,
+            userId: parsed.sub,
             email: parsed.email,
+            username: parsed.preferred_username,
             firstName: parsed.given_name,
             lastname: parsed.family_name,
-            personType: role
+            type: role
         };
     }
     return null;

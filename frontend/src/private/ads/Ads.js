@@ -1,13 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import ReactTags from "./ReactTags";
+import {useAuth} from "../../App";
+import ApplyDialog from "./ApplyDialog";
 
 function Ads () {
+    const {user} = useAuth();
     const [ads, setAds] = useState([]);
     const [query, setQuery] = useState('');
     const [filter, setFilter] = useState({state: '', city: '', company: '', tags: [] });
 
-    // const [tags, setTags] = useState([]);
     const [tagSuggestions, setTagSuggestions] = useState([]);
 
     const fetchAds = () => {
@@ -31,7 +33,6 @@ function Ads () {
         Object.keys(filter).forEach(key => {
             if(filter[key]) {
                 if (filter[key] instanceof Array) {
-                    console.log('array');
                     params[key] = filter[key].map(i => i.name).join(',');
                 } else {
                     params[key] = filter[key];
@@ -124,15 +125,6 @@ function Ads () {
                             onAddition={onAddition}
                             onDelete={onDelete}
                         />
-                        {/* <input 
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            type="text"
-                            // value={''}
-                            name="tags"
-                            onChange={(event) => onFilterChange(event)}
-                            placeholder="Tags" 
-                            required
-                        /> */}
                     </div>
                 </div>
                 <button type="button" onClick={() => fetchFilter()}
@@ -176,10 +168,16 @@ function Ads () {
                             Created by
                         </th>
                         <th scope="col" className="py-3 px-3">
+                            Applied count
+                        </th>
+                        <th scope="col" className="py-3 px-3">
                             Files
                         </th>
                         <th scope="col" className="py-3 px-3">
                             Tags
+                        </th>
+                        <th scope="col" className="py-3 px-3">
+
                         </th>
                     </tr>
                     </thead>
@@ -213,12 +211,26 @@ function Ads () {
                                         {ad.createdBy}
                                     </td>
                                     <td className="py-4 px-3">
+                                        {ad.applied.length}
+                                    </td>
+                                    <td className="py-4 px-3">
                                         {ad.files}
                                     </td>
                                     <td className="py-4 px-3">
                                         {ad.tags ? ad.tags.map(t => {
                                             return (<span key={t.id} className={'ml-4 mb-1 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700 border'}>{t.name}</span>)
                                         }) : 'Empty'}
+                                    </td>
+                                    <td className="py-4 px-3">
+                                        {user.id}
+                                        {
+                                            user.username !== ad.createdBy
+                                            && user.type === 'student'
+                                                && !ad.applied.find(a => a.email === user.email)?
+                                                (
+                                                   <ApplyDialog fetch={fetchAds} ad={ad} />
+                                                ) : ''
+                                        }
                                     </td>
                                 </tr>
                             )

@@ -3,6 +3,7 @@ package miu.edu.alumni.controller;
 import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.model.JobAdvertisement;
 import miu.edu.alumni.model.JobHistory;
+import miu.edu.alumni.model.Student;
 import miu.edu.alumni.service.JobAdServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,5 +52,10 @@ public class JobAdController {
     @GetMapping("search")
     public List<JobAdvertisement> search(@RequestParam String query) {
         return jobAdService.search(query);
+    }
+
+    @PostMapping("apply/{id}")
+    public void apply(@PathVariable Long id, @RequestBody Student student) {
+        jobAdService.apply(id, student);
     }
 }

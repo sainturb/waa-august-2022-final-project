@@ -55,9 +55,9 @@ function Private () {
                                 <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'my-ads'} >My Ads</Link>
                                 </li>
-                                <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
-                                    <Link to={'search'} >Search Job</Link>
-                                </li>
+                                {/*<li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">*/}
+                                {/*    <Link to={'search'} >Search Job</Link>*/}
+                                {/*</li>*/}
                                 <li className="rounded-md hover:bg-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 pl-4 pr-4 pt-1 pb-1 w-fit">
                                     <Link to={'student'} >Students</Link>
                                 </li>
@@ -80,7 +80,6 @@ function Private () {
                     <main role="main" className="w-full sm:w-3/4 md:w-5/6 pt-1 px-2">
                         <Routes>
                             <Route path={'/'} element={<Dashboard />}></Route>
-                            <Route path={'search'} element={<Search />}></Route>
                             <Route path={'profile'} element={<Profile />}></Route>
                             <Route path={'my-jobs'} element={<MyHistory />}></Route>
                             <Route path={'my-ads'} element={<MyAds />}></Route>

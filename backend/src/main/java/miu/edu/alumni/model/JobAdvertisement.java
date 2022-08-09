@@ -38,4 +38,7 @@ public class JobAdvertisement {
     @OneToMany(mappedBy = "advertisement", fetch = FetchType.LAZY)
     private List<FileEntity> files;
 
+    @ManyToMany()
+    private List<Student> applied;
+
 }

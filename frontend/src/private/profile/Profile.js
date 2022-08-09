@@ -9,15 +9,16 @@ function Profile() {
     const [message, setMessage] = useState(null);
     const [user, setUser] = useState({
         id: null,
-        type: auth.user.personType,
+        type: auth.user.type,
         firstName: auth.user.firstName,
         lastname: auth.user.lastname,
         email: auth.user.email,
-        userId: auth.user.id,
+        userId: auth.user.userId,
         city: '',
         address: '',
         state: '',
         zipCode: '',
+        gpa: '',
         active: true,
         department: {},
         major: {},
@@ -25,7 +26,6 @@ function Profile() {
     const [departments, setDepartments] = useState([]);
     const onChange = (event) => {
         if (event.target.name === 'major' || event.target.name === 'department') {
-            console.log(event.target);
             setUser({...user, [event.target.name]: JSON.parse(event.target.value)})
         } else {
             setUser({...user, [event.target.name]: event.target.value})
@@ -62,11 +62,11 @@ function Profile() {
                     setUser({
                         ...user,
                         id: response.data.id,
-                        zipCode: response.data.zipCode,
-                        address: response.data.address,
-                        state: response.data.state,
-                        city: response.data.city,
-                        gpa: response.data.gpa,
+                        zipCode: response.data.zipCode ? response.data.zipCode : '',
+                        address: response.data.address ? response.data.address : '',
+                        state: response.data.state ? response.data.state : '',
+                        city: response.data.city ? response.data.city : '',
+                        gpa: response.data.gpa ? response.data.gpa : 0,
                         departmentId: response.data.department ? response.data.department.id : undefined,
                         majorId: response.data.major ? response.data.major.id : undefined,
                     });
@@ -190,7 +190,7 @@ function Profile() {
                                 {
                                     states.map(state => {
                                         return (
-                                            <option key={state.name} value={state.name}>{state.name}</option>
+                                            <option key={state.name} value={state.abbreviation}>{state.name}</option>
                                         )
                                     })
                                 }
