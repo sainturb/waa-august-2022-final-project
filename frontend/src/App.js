@@ -66,6 +66,8 @@ export const getCurrentUser = () => {
         const parsed  = JSON.parse(window.atob(token.split('.')[1]));
         const roles =  parsed.realm_access.roles
         const role = roles.find(r => r === 'admin') ? roles.find(r => r === 'admin') : roles.find(r => r === 'faculty') ? roles.find(r => r === 'faculty') : roles.find(r => r === 'student') ? roles.find(r => r === 'student') : null;
+        console.log(roles);
+        console.log(role);
         return {
             id: parsed.sub,
             email: parsed.email,

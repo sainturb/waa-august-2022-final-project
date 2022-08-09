@@ -3,8 +3,10 @@ import axios from "axios";
 
 function Student () {
     const [students, setStudents] = useState([]);
-    const [search, setSearch] = useState(undefined);
-    const [filter, setFilter] = useState({state: undefined, city: undefined, zipCode: undefined, major: undefined, gpa: undefined});
+    const [search, setSearch] = useState('');
+    const [filter, setFilter] = useState({state: '', city: '', zipCode: '', major: '', gpa: ''});
+
+
     const fetch = () => {
         axios.get(`/api/students`).then(response => {
             if (response.data) {
@@ -126,7 +128,13 @@ function Student () {
                             Zip
                         </th>
                         <th scope="col" className="py-3 px-6">
+                            Major
+                        </th>
+                        <th scope="col" className="py-3 px-6">
                             GPA
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Status
                         </th>
                         <th scope="col" className="py-3 px-6">
                             <span className="sr-only">Edit</span>
@@ -152,6 +160,9 @@ function Student () {
                                     </td>
                                     <td className="py-4 px-6">
                                         {student.zipCode}
+                                    </td>
+                                    <td className="py-4 px-6">
+                                        {student.major ? student.major.name : ''}
                                     </td>
                                     <td className="py-4 px-6">
                                         {student.gpa}

@@ -4,8 +4,8 @@ import axios from "axios";
 
 function Faculty() {
     const [faculties, setFaculties] = useState([]);
-    const [search, setSearch] = useState(undefined);
-    const [filter, setFilter] = useState({state: undefined, city: undefined, zipCode: undefined, department: undefined});
+    const [search, setSearch] = useState('');
+    const [filter, setFilter] = useState({state: '', city: '', zipCode: '', department: ''});
     const fetch = () => {
         axios.get(`/api/faculties`).then(response => {
             if (response.data) {
@@ -167,7 +167,7 @@ function Faculty() {
                                         {faculty.zipCode}
                                     </td>
                                     <td className="py-4 px-6">
-                                        {faculty.department}
+                                        {faculty.department ? faculty.department.name : ''}
                                     </td>
                                     <td className="py-4 px-6">
                                         {faculty.is_deleted ? (<span className="font-medium text-gray-600 dark:text-gray-500 ">Deleted</span>) : (<span className="font-medium text-green-600 dark:text-green-500 ">Active</span>)}
