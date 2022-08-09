@@ -1,7 +1,8 @@
 spring:
   jackson:
     serialization:
-      write-dates-as-timestamps: false
+      write_dates_as_timestamps: false
+
   datasource:
     url: jdbc:postgresql://localhost:5432/alumni_db
     username: postgres
@@ -40,3 +41,4 @@ keycloak:
   realm: alumni
   resource: alumni
   principal-attribute: preferred_username
+#  use-resource-role-mappings : true

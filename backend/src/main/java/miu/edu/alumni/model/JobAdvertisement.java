@@ -1,15 +1,17 @@
 package miu.edu.alumni.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import org.springframework.boot.convert.DataSizeUnit;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
 @Data
+@EntityListeners(AuditingEntityListener.class)
 public class JobAdvertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +26,12 @@ public class JobAdvertisement {
     private String state;
     private String city;
     private String company;
-    private double salary;
-    private LocalDateTime posted;
+    private Double salary;
+
+    @CreatedBy
+    private String createdBy;
+    @CreatedDate
+    private Instant posted;
 
     @ManyToMany()
     private List<Tag> tags;

@@ -1,8 +1,8 @@
 package miu.edu.alumni.service;
 
 import lombok.RequiredArgsConstructor;
-import miu.edu.alumni.model.Faculty;
-import miu.edu.alumni.repository.FacultyRepository;
+import miu.edu.alumni.model.Department;
+import miu.edu.alumni.repository.DepartmentRepository;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -13,32 +13,23 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FacultyServiceImpl implements FacultyService {
+public class DepartmentServiceImpl implements DepartmentService {
 
-    private final FacultyRepository repository;
+    private final DepartmentRepository repository;
     private final KeycloakService keycloak;
 
     @Override
-    public List<Faculty> findAll() {
+    public List<Department> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Faculty> findById(Long id) {
+    public Optional<Department> findById(Long id) {
         return repository.findById(id);
     }
-
     @Override
-    public Optional<Faculty> findByUserId(String id) {
-        return repository.findByUserId(id);
-    }
-
-    @Override
-    public Faculty save(Faculty faculty) {
-        Faculty created = repository.save(faculty);
-        RoleRepresentation roleRepresentation = keycloak.findRoleByName("faculty");
-        keycloak.assignRole(faculty.getUserId(), roleRepresentation);
-        return created;
+    public Department save(Department department) {
+        return repository.save(department);
     }
 
     @Override
@@ -47,9 +38,9 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public List<Faculty> filter(Map<String, Object> params) {
+    public List<Department> filter(Map<String, Object> params) {
         if (!params.isEmpty()) {
-            Specification<Faculty> query = Specification.where(null);
+            Specification<Department> query = Specification.where(null);
             for (String key : params.keySet()) {
                 query = query.and(valueEquals(key, params.get(key)));
             }
@@ -59,9 +50,9 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public List<Faculty> query(String string) {
+    public List<Department> query(String string) {
         if (!string.isEmpty()) {
-            Specification<Faculty> query = Specification
+            Specification<Department> query = Specification
                     .where(valueContains("firstName", string))
                     .or(valueContains("lastname", string))
                     .or(valueContains("email", string));
@@ -71,11 +62,11 @@ public class FacultyServiceImpl implements FacultyService {
         return repository.findAll();
     }
 
-    static Specification<Faculty> valueContains(String property, Object value) {
+    static Specification<Department> valueContains(String property, Object value) {
         return (student, cq, cb) -> cb.like(student.get(property), "%" + value.toString() + "%");
     }
 
-    static Specification<Faculty> valueEquals(String property, Object value) {
+    static Specification<Department> valueEquals(String property, Object value) {
         return (student, cq, cb) -> cb.equal(student.get(property), value);
     }
 }

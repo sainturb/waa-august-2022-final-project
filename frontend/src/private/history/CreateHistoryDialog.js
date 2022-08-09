@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
-function CreateHistoryDialog({fetch}) {
-    const [body, setBody] = useState({companyName: '', startDate: '', endDate: '', reasonToLeave: ''});
+function CreateHistoryDialog({buttonText, fetch, editBody}) {
+    const [body, setBody] = useState(editBody ? editBody : {companyName: '', startDate: '', endDate: '', reasonToLeave: ''});
     const [dialog, setDialog] = useState(false);
     const showDialog = (event) => {
         event.preventDefault();
@@ -16,7 +16,7 @@ function CreateHistoryDialog({fetch}) {
     }
     const save = (event) => {
         event.preventDefault();
-        body.startDate = new Date(body.startDate);
+        body.startDate = new Date(body.endDate);
         body.endDate = new Date(body.endDate);
         axios.post('/api/histories', body).then(response => {
             console.log(body);
@@ -34,7 +34,7 @@ function CreateHistoryDialog({fetch}) {
             <button type="button"
                     className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                     onClick={(event) => showDialog(event)}>
-                Create job history
+                {buttonText}
             </button>
 
             {

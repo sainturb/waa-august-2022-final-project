@@ -1,8 +1,6 @@
 package miu.edu.alumni.model;
 
 import lombok.Data;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -10,7 +8,7 @@ import java.time.Instant;
 @Entity
 @Data
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "person_type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

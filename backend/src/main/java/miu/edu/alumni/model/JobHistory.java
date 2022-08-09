@@ -1,5 +1,6 @@
 package miu.edu.alumni.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -34,9 +36,9 @@ public class JobHistory {
     @CreatedDate
     private Instant createdDate;
 
-    @OneToMany(mappedBy="history", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "history", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags;
 }

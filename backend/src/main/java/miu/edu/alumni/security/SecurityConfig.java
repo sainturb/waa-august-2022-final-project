@@ -42,7 +42,6 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/download/**").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .anyRequest()
                 .authenticated();

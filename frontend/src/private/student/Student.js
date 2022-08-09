@@ -3,8 +3,10 @@ import axios from "axios";
 
 function Student () {
     const [students, setStudents] = useState([]);
-    const [search, setSearch] = useState(undefined);
-    const [filter, setFilter] = useState({state: undefined, city: undefined, zipCode: undefined, major: undefined, gpa: undefined});
+    const [search, setSearch] = useState('');
+    const [filter, setFilter] = useState({state: '', city: '', zipCode: '', major: '', gpa: ''});
+
+
     const fetch = () => {
         axios.get(`/api/students`).then(response => {
             if (response.data) {
@@ -42,6 +44,15 @@ function Student () {
 
     const onFilterChange = (event) => {
         setFilter({...filter, [event.target.name]: event.target.value});
+    }
+
+    const onDelete = (faculty) => {
+        const yes = window.confirm('Do you want to continue this action?');
+        if (yes) {
+            axios.delete('/api/students/' + faculty.id).then(res => {
+                alert('deleted');
+            });
+        }
     }
 
     useEffect(() => {
@@ -126,10 +137,16 @@ function Student () {
                             Zip
                         </th>
                         <th scope="col" className="py-3 px-6">
+                            Major
+                        </th>
+                        <th scope="col" className="py-3 px-6">
                             GPA
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            <span className="sr-only">Edit</span>
+                            Status
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            <span className="sr-only">Action</span>
                         </th>
                     </tr>
                     </thead>
@@ -154,13 +171,18 @@ function Student () {
                                         {student.zipCode}
                                     </td>
                                     <td className="py-4 px-6">
+                                        {student.major ? student.major.name : ''}
+                                    </td>
+                                    <td className="py-4 px-6">
                                         {student.gpa}
                                     </td>
                                     <td className="py-4 px-6">
                                         {student.is_deleted ? (<span className="font-medium text-gray-600 dark:text-gray-500 ">Deleted</span>) : (<span className="font-medium text-green-600 dark:text-green-500 ">Active</span>)}
                                     </td>
                                     <td className="py-4 px-6 text-right">
-                                        <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        <button
+                                            onClick={() => onDelete(student)}
+                                            className="font-medium  ml-2 text-orange-600 dark:text-orange-500 hover:underline">Delete</button>
                                     </td>
                                 </tr>
                             )

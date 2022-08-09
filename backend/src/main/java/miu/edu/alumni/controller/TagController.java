@@ -2,6 +2,7 @@ package miu.edu.alumni.controller;
 
 import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.dto.TagDto;
+import miu.edu.alumni.model.Tag;
 import miu.edu.alumni.service.TagService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class TagController {
     private final TagService tagService;
 
     @GetMapping
-    public List<TagDto> findAll() {
+    public List<Tag> findAll() {
         return tagService.findAll();
     }
 }
