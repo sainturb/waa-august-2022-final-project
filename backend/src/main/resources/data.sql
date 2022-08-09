@@ -5,7 +5,7 @@ VALUES('Deers', 'IA','Fairfield','Dental Insurance', 'We are seeking an energeti
 INSERT INTO job_advertisement(company, state, city, benefit, description, posted, salary, title)
 VALUES('Apple', 'TX','Austin','Paid time off', 'UX Developers, Employer at Indeed serve a critical role evolving concepts and designs into production for the Indeed Employer website experience. They specialize in bridging the gap between design and engineering, executing and advocating high-quality UX standards and best practices.', '2022-07-09 15:22:49.828', 159000, 'UX Developer');
 INSERT INTO job_advertisement(company, state, city, benefit, description, posted, salary, title)
-VALUES('Amazon', '','Remote','401k', 'Opportunity for an Android Developer to join a rapidly growing healthcare company focused on leveraging information technology to aid in population health and improving health outcomes.The Android app developer will work with our team of talented engineers to design and build the next generation of our mobile applications. Android programming works closely with other app development and technical teams.', '2022-07-09 14:22:49.828', 70000, 'Android Developer');
+VALUES('Amazon', 'TX','Remote','401k', 'Opportunity for an Android Developer to join a rapidly growing healthcare company focused on leveraging information technology to aid in population health and improving health outcomes.The Android app developer will work with our team of talented engineers to design and build the next generation of our mobile applications. Android programming works closely with other app development and technical teams.', '2022-07-09 14:22:49.828', 70000, 'Android Developer');
 INSERT INTO job_advertisement(company, state, city, benefit, description, posted, salary, title)
 VALUES('Amgen', 'FL','Tampa','Flexible Schedule', 'U.S. citizenship required (defined by federal contract): Required Education: Bachelor’s in Computer Science, Computer Engineering, Mathematics, Physics or related field or possess relevant experience in lieu of education Preferred Education: Master’s or PhD in Computer Science, Computer Engineering, Mathematics, Physics or related field', '2022-07-09 13:22:49.828', 120000, 'Software Engineer - Front End');
 INSERT INTO job_advertisement(company, state, city, benefit, description, posted, salary, title)
@@ -49,3 +49,10 @@ INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(3,8);
 INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(3,10);
 INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(4,2);
 INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(4,5);
+
+INSERT INTO department("name")VALUES('Computer Science');
+INSERT INTO department("name")VALUES('Data Analyst');
+INSERT INTO department("name")VALUES('Big Data');
+INSERT INTO department("name")VALUES('Software');
+INSERT INTO department("name")VALUES('Mobile');
+INSERT INTO department("name")VALUES('Design');

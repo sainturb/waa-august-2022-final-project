@@ -1,11 +1,15 @@
 package miu.edu.alumni.service;
 
 import miu.edu.alumni.model.JobAdvertisement;
+import miu.edu.alumni.model.Tag;
 import miu.edu.alumni.repository.JobAdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.*;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +44,12 @@ public class JobAdServiceImpl implements JobAdService {
         if (!params.isEmpty()) {
             Specification<JobAdvertisement> specification = Specification.where(null);
             for (String key : params.keySet()) {
-                specification = specification.and(valueEquals(key, params.get(key)));
+                if (key.equals("tags")) {
+                    String valueText = (String) params.get(key);
+                    specification = specification.and(valueIn(key, Arrays.stream(valueText.split(",")).toList()));
+                } else {
+                    specification = specification.and(valueEquals(key, params.get(key)));
+                }
             }
             return jobAdRepo.findAll(specification);
         }
@@ -58,6 +67,15 @@ public class JobAdServiceImpl implements JobAdService {
             return jobAdRepo.findAll(specification);
         }
         return jobAdRepo.findAll();
+    }
+
+    static Specification<JobAdvertisement> valueIn(String property, List<String> tags) {
+        return (ad, cq, cb) -> {
+            cq.distinct(true);
+            Root<Tag> owner = cq.from(Tag.class);
+            Expression<Collection<JobAdvertisement>> ownerCats = owner.get("advertisements");
+            return cb.and(cb.in(owner.get("name")).value(tags), cb.isMember(ad, ownerCats));
+        };
     }
 
     static Specification<JobAdvertisement> valueContains(String property, Object value) {

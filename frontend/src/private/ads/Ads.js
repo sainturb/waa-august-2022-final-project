@@ -1,15 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
-import ReactTags from 'react-tag-autocomplete'
-
-import './ads.css'
+import ReactTags from "./ReactTags";
 
 function Ads () {
     const [ads, setAds] = useState([]);
     const [query, setQuery] = useState('');
-    const [filter, setFilter] = useState({state: null, city: null, company: null });
+    const [filter, setFilter] = useState({state: '', city: '', company: '', tags: [] });
 
-    const [tags, setTags] = useState([]);
+    // const [tags, setTags] = useState([]);
     const [tagSuggestions, setTagSuggestions] = useState([]);
 
     const fetchAds = () => {
@@ -32,24 +30,17 @@ function Ads () {
         const params = {};
         Object.keys(filter).forEach(key => {
             if(filter[key]) {
-                params[key] = filter[key];
+                if (filter[key] instanceof Array) {
+                    console.log('array');
+                    params[key] = filter[key].map(i => i.name).join(',');
+                } else {
+                    params[key] = filter[key];
+                }
             }
         });
 
         axios.get('/api/advertisements/filter', {params: params}).then(response => {
             if(response.data) {
-                if(tags.length > 0) {
-                    response.data = response.data.filter(a => {
-                        let isFilter = false;
-                        a.tags.forEach(at => {
-                            if(tags.map(t => t.id).includes(at.id)) {
-                                isFilter = true;
-                                return;
-                            }
-                        });
-                        return isFilter;
-                    });
-                }
                 setAds(response.data);
             }
         });
@@ -64,11 +55,14 @@ function Ads () {
     };
 
     const onAddition = (newTag) => {
-        setTags([...tags, newTag]);
+        setFilter({...filter, tags: [...filter.tags, newTag]});
+        console.log(filter);
+        // setTags([...tags, newTag]);
     };
 
     const onDelete = (tagIndex) => {
-        setTags(tags.filter((_, i) => i !== tagIndex));
+        setFilter({...filter, tags: filter.tags.filter((_, i) => i !== tagIndex)});
+        // setTags(tags.filter((_, i) => i !== tagIndex));
     };
 
 
@@ -127,7 +121,7 @@ function Ads () {
                     <div>
                         <ReactTags
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            tags={tags}
+                            tags={filter.tags}
                             suggestions={tagSuggestions}
                             noSuggestionsText="No matching tags"
                             onAddition={onAddition}
@@ -219,7 +213,9 @@ function Ads () {
                                         {ad.files}
                                     </td>
                                     <td className="py-4 px-3">
-                                        {ad.tags.map(t => t.name).join(', ')}
+                                        {ad.tags ? ad.tags.map(t => {
+                                            return (<span key={t.id} className={'ml-4 mb-1 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700 border'}>{t.name}</span>)
+                                        }) : 'Empty'}
                                     </td>
                                 </tr>
                             )

@@ -11,7 +11,6 @@ function MyHistory () {
             }
         });
     }
-
     useEffect(() => {
         fetch();
     }, [])

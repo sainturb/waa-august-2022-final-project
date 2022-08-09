@@ -9,6 +9,7 @@ import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Service
@@ -66,17 +67,17 @@ public class KeycloakService {
                 .add(List.of(roleRepresentation));
     }
 
-    public void create(UserRequest request) {
+    public Response create(UserRequest request) {
         CredentialRepresentation password = preparePasswordRepresentation(request.getPassword());
         UserRepresentation user = prepareUserRepresentation(request, password);
-        keycloak
+        return keycloak
                 .realm("alumni")
                 .users()
                 .create(user);
     }
 
     public void setRequiredAction(String userId, String action) {
-        UserResource user =  keycloak
+        UserResource user = keycloak
                 .realm("alumni")
                 .users()
                 .get(userId);
@@ -105,7 +106,6 @@ public class KeycloakService {
         newUser.setCredentials(List.of(credential));
         newUser.setEnabled(true);
         newUser.setEmailVerified(true);
-        newUser.setRequiredActions(List.of("TERMS_AND_CONDITIONS"));
         return newUser;
     }
 

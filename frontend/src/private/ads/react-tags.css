@@ -1,0 +1,14 @@
+.input-tag {
+    border: none;
+    outline: none;
+}
+.dropdown-tag {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    min-width: 120px;
+    width: 100%;
+}
+.wrapper-tag  {
+    position: relative;
+}
