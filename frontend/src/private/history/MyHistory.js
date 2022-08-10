@@ -5,7 +5,7 @@ import CreateHistoryDialog from "./CreateHistoryDialog";
 function MyHistory () {
     const [history, setHistory] = useState([]);
     const fetch = () => {
-        axios.get(`/api/histories/my`).then(response => {
+        axios.get(`/api/histories/list/my`).then(response => {
             if (response.data) {
                 setHistory(response.data);
             }

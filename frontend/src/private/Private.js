@@ -13,6 +13,8 @@ import axios from "axios";
 import Navbar from '../public/Navbar';
 import MyHistory from "./history/MyHistory";
 import MyAds from "./ads/MyAds";
+import AppliedStudent from "./ads/AppliedStudents";
+import AppliedStudents from "./ads/AppliedStudents";
 
 
 function Private () {
@@ -83,6 +85,7 @@ function Private () {
                             <Route path={'profile'} element={<Profile />}></Route>
                             <Route path={'my-jobs'} element={<MyHistory />}></Route>
                             <Route path={'my-ads'} element={<MyAds />}></Route>
+                            <Route path={'applied-students/:id'} element={<AppliedStudents />}></Route>
                             <Route path={'student'} element={<Student />}></Route>
                             <Route path={'faculty'} element={<Faculty />}></Route>
                             <Route path={'ads'} element={<Ads />}></Route>

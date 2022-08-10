@@ -18,9 +18,6 @@ public class JobAdServiceImpl implements JobAdService {
     @Autowired
     private JobAdvertisementRepository jobAdRepo;
 
-    @Autowired
-    private StudentServiceImpl studentService;
-
     @Override
     public JobAdvertisement save(JobAdvertisement jobAd) {
         return jobAdRepo.save(jobAd);
@@ -29,6 +26,11 @@ public class JobAdServiceImpl implements JobAdService {
     @Override
     public List<JobAdvertisement> findAll() {
         return jobAdRepo.findAll();
+    }
+
+    @Override
+    public Optional<JobAdvertisement> findOne(Long id) {
+        return jobAdRepo.findById(id);
     }
 
     @Override
