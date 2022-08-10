@@ -17,7 +17,7 @@ public class Student extends Person {
     @OneToOne
     @JoinColumn(name="major_id")
     private Department major;
-    private Float gpa;
+    private Double gpa;
 
     @ManyToMany(mappedBy = "applied", fetch = FetchType.LAZY)
     @JsonIgnore

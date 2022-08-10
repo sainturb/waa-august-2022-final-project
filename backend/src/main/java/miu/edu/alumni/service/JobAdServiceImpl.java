@@ -57,7 +57,7 @@ public class JobAdServiceImpl implements JobAdService {
             for (String key : params.keySet()) {
                 if (key.equals("tags")) {
                     String valueText = (String) params.get(key);
-                    specification = specification.and(valueIn(key, Arrays.stream(valueText.split(",")).toList()));
+                    specification = specification.and(valueIn(Arrays.stream(valueText.split(",")).toList()));
                 } else {
                     specification = specification.and(valueEquals(key, params.get(key)));
                 }
@@ -89,12 +89,12 @@ public class JobAdServiceImpl implements JobAdService {
         });
     }
 
-    static Specification<JobAdvertisement> valueIn(String property, List<String> tags) {
+    static Specification<JobAdvertisement> valueIn(List<String> tags) {
         return (ad, cq, cb) -> {
             cq.distinct(true);
             Root<Tag> owner = cq.from(Tag.class);
-            Expression<Collection<JobAdvertisement>> ownerCats = owner.get("advertisements");
-            return cb.and(cb.in(owner.get("name")).value(tags), cb.isMember(ad, ownerCats));
+            Expression<Collection<JobAdvertisement>> ownerTags = owner.get("advertisements");
+            return cb.and(cb.in(owner.get("name")).value(tags), cb.isMember(ad, ownerTags));
         };
     }
 

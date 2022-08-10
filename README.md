@@ -38,13 +38,13 @@ Create dashboard pages for students and faculty:
 * ✅ (Keycloak) Students and faculty can reset their password.
 	* ✅ (Keycloak) Users should follow a password reset link.
 * Use [ECharts](https://echarts.apache.org/en/index.html) to create live charts for dashboards:
-	* Number of job advertisements per location. 
-	* Number of students per state.
+	* ✅ (Completed) Number of job advertisements per location. 
+	* ✅ (Completed) Number of students per state.
 	* Number of students per city. (User should select the state.)
-	* Tags.
+	* ✅ (Completed) Tags.
 	* Tags with location. 
 	* Average time spent to find a job per gpa range.
-	* Add at least 4 more charts as you see fit.
+	* ✅ (Completed) Add at least 4 more charts as you see fit.
 * ✅ (Completed) All delete operations should be a soft deletion.
 * ✅ (Completed) Log all user activities on the system.
 	* ✅ (Completed) Optional: Log data before/after for update operations.

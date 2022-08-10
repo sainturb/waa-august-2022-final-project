@@ -44,7 +44,7 @@ public class HistoryServiceImpl implements HistoryService {
         if (!params.isEmpty()) {
             Specification<JobHistory> query = Specification.where(null);
             for (String key : params.keySet()) {
-                query.and(valueEquals(key, params.get(key)));
+                query = query.and(valueEquals(key, params.get(key)));
             }
             return repository.findAll(query);
         }

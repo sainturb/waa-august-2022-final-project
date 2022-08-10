@@ -1,7 +1,9 @@
 package miu.edu.alumni.service;
 
 import lombok.RequiredArgsConstructor;
+import miu.edu.alumni.model.Department;
 import miu.edu.alumni.model.Student;
+import miu.edu.alumni.repository.DepartmentRepository;
 import miu.edu.alumni.repository.StudentRepository;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,6 +18,7 @@ import java.util.Optional;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository repository;
+    private final DepartmentRepository majorRepository;
     private final KeycloakService keycloak;
 
     @Override
@@ -51,7 +54,15 @@ public class StudentServiceImpl implements StudentService {
         if (!params.isEmpty()) {
             Specification<Student> query = Specification.where(null);
             for (String key : params.keySet()) {
-                query.and(valueEquals(key, params.get(key)));
+                if (key.equals("major")) {
+                    Long id = Long.valueOf(params.get(key).toString());
+                    Optional<Department> majorOptional = majorRepository.findById(id);
+                    if (majorOptional.isPresent()) {
+                        query = query.and(valueEquals(key, majorOptional.get()));
+                    }
+                } else {
+                    query = query.and(valueEquals(key, params.get(key)));
+                }
             }
             return repository.findAll(query);
         }

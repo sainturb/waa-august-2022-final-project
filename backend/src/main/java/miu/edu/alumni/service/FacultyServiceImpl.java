@@ -1,12 +1,19 @@
 package miu.edu.alumni.service;
 
 import lombok.RequiredArgsConstructor;
+import miu.edu.alumni.model.Department;
 import miu.edu.alumni.model.Faculty;
+import miu.edu.alumni.model.JobAdvertisement;
+import miu.edu.alumni.model.Tag;
+import miu.edu.alumni.repository.DepartmentRepository;
 import miu.edu.alumni.repository.FacultyRepository;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,6 +23,7 @@ import java.util.Optional;
 public class FacultyServiceImpl implements FacultyService {
 
     private final FacultyRepository repository;
+    private final DepartmentRepository departmentRepository;
     private final KeycloakService keycloak;
 
     @Override
@@ -51,7 +59,15 @@ public class FacultyServiceImpl implements FacultyService {
         if (!params.isEmpty()) {
             Specification<Faculty> query = Specification.where(null);
             for (String key : params.keySet()) {
-                query = query.and(valueEquals(key, params.get(key)));
+                if (key.equals("department")) {
+                    Long id = Long.valueOf(params.get(key).toString());
+                    Optional<Department> departmentOptional = departmentRepository.findById(id);
+                    if (departmentOptional.isPresent()) {
+                        query = query.and(valueEquals(key, departmentOptional.get()));
+                    }
+                } else {
+                    query = query.and(valueEquals(key, params.get(key)));
+                }
             }
             return repository.findAll(query);
         }
