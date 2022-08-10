@@ -107,14 +107,14 @@ active: Boolean
 
 #### Technical Details
 ---
-* Use Java and Spring Boot framework for the backend project.
-* Use React framework for the frontend project.
-* Use n-tier software architecture model.
-* PostgreSQL is recommended as a Relational Database system.
-* Populate your database with dummy data using `data.sql`.
-	* Prepare your dummy data for testing and presentation.
-* If necessary, change isolation levels.
-* If necessary, change Fetch mode.
+* ✅ Use Java and Spring Boot framework for the backend project.
+* ✅ Use React framework for the frontend project.
+* ✅ Use n-tier software architecture model.
+* ✅ PostgreSQL is recommended as a Relational Database system.
+* ✅ Populate your database with dummy data using `data.sql`.
+	* ✅ Prepare your dummy data for testing and presentation.
+* ✅ If necessary, change isolation levels.
+* ✅ If necessary, change Fetch mode.
 
 
 #### Submission

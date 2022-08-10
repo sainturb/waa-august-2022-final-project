@@ -47,6 +47,7 @@ function History () {
     const onClear = () => {
         Object.keys(filter).forEach(key => filter[key] = '');
         setFilter({...filter})
+        fetch();
     }
 
     useEffect(() => {

@@ -75,7 +75,8 @@ function Ads () {
 
     const onClear = () => {
         Object.keys(filter).forEach(key => filter[key] = '');
-        setFilter({...filter})
+        setFilter({...filter});
+        fetchAds();
     }
 
     useEffect(() => {

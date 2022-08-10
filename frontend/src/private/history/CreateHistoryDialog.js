@@ -16,10 +16,9 @@ function CreateHistoryDialog({buttonText, fetch, editBody}) {
     }
     const save = (event) => {
         event.preventDefault();
-        body.startDate = new Date(body.endDate);
+        body.startDate = new Date(body.startDate);
         body.endDate = new Date(body.endDate);
         axios.post('/api/histories', body).then(response => {
-            console.log(body);
             hideDialog();
             fetch();
         });

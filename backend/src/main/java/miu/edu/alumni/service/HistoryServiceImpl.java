@@ -7,7 +7,14 @@ import miu.edu.alumni.repository.StudentRepository;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.Path;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,6 +25,8 @@ public class HistoryServiceImpl implements HistoryService {
     private final JobHistoryRepository repository;
 
     private final KeycloakService keycloakService;
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US);
 
     @Override
     public List<JobHistory> findAll() {
@@ -44,7 +53,13 @@ public class HistoryServiceImpl implements HistoryService {
         if (!params.isEmpty()) {
             Specification<JobHistory> query = Specification.where(null);
             for (String key : params.keySet()) {
-                query = query.and(valueEquals(key, params.get(key)));
+               if (key.equals("startDate")) {
+                   query = query.and(greaterThan(key, params.get(key)));
+               } else if (key.equals("endDate")) {
+                   query = query.and(lessThen(key, params.get(key)));
+               } else {
+                   query = query.and(valueEquals(key, params.get(key)));
+               }
             }
             return repository.findAll(query);
         }
@@ -72,6 +87,22 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public List<JobHistory> findUserId(String userId) {
         return myAll(keycloakService.findById(userId).getUsername());
+    }
+
+    static Specification<JobHistory> greaterThan(String property, Object value) {
+        return (history, cq, cb) -> {
+            LocalDate date = LocalDate.parse(value.toString(), formatter);
+            Instant v = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+            return cb.greaterThan(history.get(property), v);
+        };
+    }
+
+    static Specification<JobHistory> lessThen(String property, Object value) {
+        return (history, cq, cb) -> {
+            LocalDate date = LocalDate.parse(value.toString(), formatter);
+            Instant v = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+            return cb.greaterThan(history.get(property), v);
+        };
     }
 
     static Specification<JobHistory> valueContains(String property, Object value) {
