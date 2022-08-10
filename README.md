@@ -17,7 +17,7 @@ Create dashboard pages for students and faculty:
 	* Optional: Use cloud services like Amazon S3 or Google Cloud Storage.
 * ✅ (Completed files missing) Students can only edit their own job advertisements.
 * ✅ (Completed) Students can apply to the jobs.
-	* Student's CV will be also visible to owners of the job advertisements that the student has applied.
+	* ✅ (Completed) Student's CV will be also visible to owners of the job advertisements that the student has applied.
 * ✅ (Completed) Students and Faculty can filter job advertisements:
 	* ✅ (Completed) by tags.
 	* ✅ (Completed) by state.
