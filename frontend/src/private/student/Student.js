@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import {STATES} from "../../constants/States";
 
 function Student () {
+    const states = STATES;
+    const [departments, setDepartments] = useState([]);
     const [students, setStudents] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState({state: '', city: '', zipCode: '', major: '', gpa: ''});
@@ -11,6 +14,11 @@ function Student () {
         axios.get(`/api/students`).then(response => {
             if (response.data) {
                 setStudents(response.data);
+            }
+        });
+        axios.get(`/api/departments`).then(response => {
+            if (response.data) {
+                setDepartments(response.data);
             }
         });
     }
@@ -55,6 +63,11 @@ function Student () {
         }
     }
 
+    const onClear = () => {
+        Object.keys(filter).forEach(key => filter[key] = '');
+        setFilter({...filter})
+    }
+
     useEffect(() => {
         fetch();
     }, [])
@@ -65,12 +78,19 @@ function Student () {
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
 
                     <div>
-                        <input type="text"
-                               value={filter.state}
-                               name={'state'}
-                               onChange={(event) => onFilterChange(event)}
-                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="State" required/>
+                        <select name={'state'}
+                                value={filter.state}
+                                onChange={(event) => onFilterChange(event)}
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option>Choose the state</option>
+                            {
+                                states.map(state => {
+                                    return (
+                                        <option key={state.name} value={state.name}>{state.name}</option>
+                                    )
+                                })
+                            }
+                        </select>
                     </div>
 
                     <div>
@@ -89,12 +109,19 @@ function Student () {
                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="Zip" required/>
 
-                    <input type="text"
-                           value={filter.major}
-                           name={'major'}
-                           onChange={(event) => onFilterChange(event)}
-                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Major" required/>
+                    <select name={'major'}
+                            value={filter.major}
+                            onChange={(event) => onFilterChange(event)}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option>Choose the major</option>
+                        {
+                            departments.map(department => {
+                                return (
+                                    <option key={department.name} value={department.id}>{department.name}</option>
+                                )
+                            })
+                        }
+                    </select>
 
                     <input type="number"
                            value={filter.gpa}
@@ -105,6 +132,9 @@ function Student () {
 
 
                 </div>
+                <button type="button" onClick={() => onClear()}
+                        className="mr-2 text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 mb-6 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800">Clear
+                </button>
                 <button type="button" onClick={() => fetchFilter()}
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 mb-6 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Filter
                 </button>

@@ -1,6 +1,7 @@
 .input-tag {
     border: none;
     outline: none;
+    background: none;
 }
 .dropdown-tag {
     position: absolute;

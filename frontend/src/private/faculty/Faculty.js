@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
 import axios from "axios";
+import {STATES} from "../../constants/States";
 
 function Faculty() {
+    const states = STATES;
+    const [departments, setDepartments] = useState([]);
     const [faculties, setFaculties] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState({state: '', city: '', zipCode: '', department: ''});
@@ -10,6 +12,11 @@ function Faculty() {
         axios.get(`/api/faculties`).then(response => {
             if (response.data) {
                 setFaculties(response.data);
+            }
+        });
+        axios.get(`/api/departments`).then(response => {
+            if (response.data) {
+                setDepartments(response.data);
             }
         });
     }
@@ -56,6 +63,11 @@ function Faculty() {
         }
     }
 
+    const onClear = () => {
+        Object.keys(filter).forEach(key => filter[key] = '');
+        setFilter({...filter})
+    }
+
     useEffect(() => {
         fetch();
     }, [])
@@ -69,12 +81,19 @@ function Faculty() {
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
 
                    <div>
-                       <input type="text"
-                              value={filter.state}
-                              name={'state'}
-                              onChange={(event) => onFilterChange(event)}
-                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="State" required/>
+                       <select name={'state'}
+                               value={filter.state}
+                               onChange={(event) => onFilterChange(event)}
+                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                           <option>Choose the state</option>
+                           {
+                               states.map(state => {
+                                   return (
+                                       <option key={state.name} value={state.name}>{state.name}</option>
+                                   )
+                               })
+                           }
+                       </select>
                    </div>
 
                    <div>
@@ -93,15 +112,25 @@ function Faculty() {
                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="Zip" required/>
 
-                    <input type="number"
-                           value={filter.department}
-                           name={'department'}
-                           onChange={(event) => onFilterChange(event)}
-                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Department" required/>
+                    <select name={'department'}
+                            value={filter.department}
+                            onChange={(event) => onFilterChange(event)}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option>Choose the department</option>
+                        {
+                            departments.map(department => {
+                                return (
+                                    <option key={department.name} value={department.id}>{department.name}</option>
+                                )
+                            })
+                        }
+                    </select>
 
 
                 </div>
+                <button type="button" onClick={() => onClear()}
+                        className="mr-2 text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 mb-6 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800">Clear
+                </button>
                 <button type="button" onClick={() => fetchFilter()}
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 mb-6 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Filter
                 </button>

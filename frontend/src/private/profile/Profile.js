@@ -190,7 +190,7 @@ function Profile() {
                                 {
                                     states.map(state => {
                                         return (
-                                            <option key={state.name} value={state.abbreviation}>{state.name}</option>
+                                            <option key={state.name} value={state.name}>{state.name}</option>
                                         )
                                     })
                                 }
