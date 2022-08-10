@@ -3,7 +3,10 @@ package miu.edu.alumni.controller;
 import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.model.JobAdvertisement;
 import miu.edu.alumni.model.JobHistory;
+import miu.edu.alumni.model.Student;
 import miu.edu.alumni.service.JobAdServiceImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -38,7 +41,13 @@ public class JobAdController {
         jobAdService.deleteById(id);
     }
 
-    @GetMapping("my")
+    @GetMapping("{id}")
+    public ResponseEntity<JobAdvertisement> findOne(@PathVariable Long id) {
+        return jobAdService.findOne(id).map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @GetMapping("/list/my")
     public List<JobAdvertisement> myAll(Principal principal) {
         return jobAdService.myAll(principal.getName());
     }
@@ -51,5 +60,10 @@ public class JobAdController {
     @GetMapping("search")
     public List<JobAdvertisement> search(@RequestParam String query) {
         return jobAdService.search(query);
+    }
+
+    @PostMapping("apply/{id}")
+    public void apply(@PathVariable Long id, @RequestBody Student student) {
+        jobAdService.apply(id, student);
     }
 }

@@ -12,12 +12,12 @@ Create dashboard pages for students and faculty:
 --- 
 * ✅ (Completed) Faculty/Students can register to the system.
 * ✅ (Completed) Faculty/Students can only edit their own profile information.
-* Students can add job advertisements.
+* ✅ (Completed files missing) Students can add job advertisements.
 	* ✅ (API is ready to use) Can upload pictures/files of the job.
 	* Optional: Use cloud services like Amazon S3 or Google Cloud Storage.
-* Students can only edit their own job advertisements.
-* Students can apply to the jobs.
-	* Student's CV will be also visible to owners of the job advertisements that the student has applied.
+* ✅ (Completed files missing) Students can only edit their own job advertisements.
+* ✅ (Completed) Students can apply to the jobs.
+	* ✅ (Completed) Student's CV will be also visible to owners of the job advertisements that the student has applied.
 * ✅ (Completed) Students and Faculty can filter job advertisements:
 	* ✅ (Completed) by tags.
 	* ✅ (Completed) by state.
@@ -47,7 +47,7 @@ Create dashboard pages for students and faculty:
 	* Add at least 4 more charts as you see fit.
 * ✅ (Completed) All delete operations should be a soft deletion.
 * ✅ (Completed) Log all user activities on the system.
-	* Optional: Log data before/after for update operations.
+	* ✅ (Completed) Optional: Log data before/after for update operations.
 * ✅ (Completed) Limit login attempts. If a user try to login with an invalid password more than 5 times, the system will lock the user and make it unable to login for 15 minutes.
 
 

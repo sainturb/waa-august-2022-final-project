@@ -1,13 +1,12 @@
 package miu.edu.alumni.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +18,8 @@ public class Student extends Person {
     @JoinColumn(name="major_id")
     private Department major;
     private Float gpa;
+
+    @ManyToMany(mappedBy = "applied", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<JobAdvertisement> appliedTo;
 }

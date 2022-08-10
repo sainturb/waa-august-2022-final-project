@@ -1,6 +1,5 @@
 package miu.edu.alumni.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -10,7 +9,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -27,7 +25,6 @@ public class JobHistory {
     private Instant startDate;
     private Instant endDate;
     private String reasonToLeave;
-
     private Boolean is_deleted = false;
 
     @CreatedBy

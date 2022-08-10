@@ -3,6 +3,8 @@ package miu.edu.alumni.controller;
 import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.model.JobHistory;
 import miu.edu.alumni.service.HistoryServiceImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -37,9 +39,20 @@ public class HistoryController {
         service.delete(id);
     }
 
-    @GetMapping("my")
+    @GetMapping("{id}")
+    public ResponseEntity<JobHistory> findOne(@PathVariable Long id) {
+        return service.findById(id).map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @GetMapping("list/my")
     public List<JobHistory> myAll(Principal principal) {
         return service.myAll(principal.getName());
+    }
+
+    @GetMapping("list/by-user-id/{userId}")
+    public List<JobHistory> byUserId(@PathVariable String userId) {
+        return service.findUserId(userId);
     }
 
     @GetMapping("filter")

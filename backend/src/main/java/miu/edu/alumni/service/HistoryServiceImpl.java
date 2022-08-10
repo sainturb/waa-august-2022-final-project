@@ -3,6 +3,7 @@ package miu.edu.alumni.service;
 import lombok.RequiredArgsConstructor;
 import miu.edu.alumni.model.JobHistory;
 import miu.edu.alumni.repository.JobHistoryRepository;
+import miu.edu.alumni.repository.StudentRepository;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import java.util.Optional;
 public class HistoryServiceImpl implements HistoryService {
 
     private final JobHistoryRepository repository;
+
+    private final KeycloakService keycloakService;
 
     @Override
     public List<JobHistory> findAll() {
@@ -64,6 +67,11 @@ public class HistoryServiceImpl implements HistoryService {
         Specification<JobHistory> query = Specification
                 .where(valueEquals("createdBy", username));
         return repository.findAll(query);
+    }
+
+    @Override
+    public List<JobHistory> findUserId(String userId) {
+        return myAll(keycloakService.findById(userId).getUsername());
     }
 
     static Specification<JobHistory> valueContains(String property, Object value) {

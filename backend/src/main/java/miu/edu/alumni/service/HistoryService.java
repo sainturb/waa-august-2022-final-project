@@ -17,4 +17,6 @@ public interface HistoryService {
     List<JobHistory> query(String string);
 
     List<JobHistory> myAll(String username);
+
+    List<JobHistory> findUserId(String userId);
 }
