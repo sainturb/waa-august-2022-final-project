@@ -1,13 +1,17 @@
 package miu.edu.alumni.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -35,8 +39,10 @@ public class JobAdvertisement {
 
     @ManyToMany()
     private List<Tag> tags;
-    @OneToMany(mappedBy = "advertisement", fetch = FetchType.LAZY)
-    private List<FileEntity> files;
+
+    @OneToMany()
+    @JoinColumn(name="advertisement_id")
+    private Set<FileEntity> files = new HashSet<>();
 
     @ManyToMany()
     private List<Student> applied;

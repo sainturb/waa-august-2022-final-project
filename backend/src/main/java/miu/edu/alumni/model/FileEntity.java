@@ -1,6 +1,5 @@
 package miu.edu.alumni.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -27,9 +26,4 @@ public class FileEntity {
     private String createdBy;
     @CreatedDate
     private Instant createdDate;
-
-    @ManyToOne
-    @JoinColumn(name="advertisement_id")
-    @JsonBackReference
-    private JobAdvertisement advertisement;
 }

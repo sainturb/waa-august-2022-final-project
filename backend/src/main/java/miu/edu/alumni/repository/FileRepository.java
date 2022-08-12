@@ -8,6 +8,5 @@ import java.util.Optional;
 
 public interface FileRepository extends JpaRepository<FileEntity, Long> {
     Optional<FileEntity> findByName(String name);
-    Optional<FileEntity> findByAdvertisementAndName(JobAdvertisement ad, String name);
-    Optional<FileEntity> findByAdvertisementAndId(JobAdvertisement ad, Long id);
+
 }

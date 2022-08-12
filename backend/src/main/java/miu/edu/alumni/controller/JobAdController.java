@@ -1,9 +1,11 @@
 package miu.edu.alumni.controller;
 
 import lombok.RequiredArgsConstructor;
+import miu.edu.alumni.model.FileEntity;
 import miu.edu.alumni.model.JobAdvertisement;
 import miu.edu.alumni.model.JobHistory;
 import miu.edu.alumni.model.Student;
+import miu.edu.alumni.service.FileServiceImpl;
 import miu.edu.alumni.service.JobAdServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ public class JobAdController {
 
     @PostMapping
     public JobAdvertisement save(@RequestBody JobAdvertisement jobAd) {
+
         return jobAdService.save(jobAd);
     }
 

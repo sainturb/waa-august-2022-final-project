@@ -19,15 +19,11 @@ import java.util.Optional;
 public class FileServiceImpl implements FileService{
 
     private final FileRepository repository;
-    private final JobAdvertisementRepository adRepository;
-
     @Override
-    public FileEntity upload(Long ad, MultipartFile multipartFile) {
+    public FileEntity upload(MultipartFile multipartFile) {
         String extension =  FilenameUtils.getExtension(multipartFile.getOriginalFilename());
         String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8), extension);
         FileEntity file = new FileEntity();
-        Optional<JobAdvertisement> advertisement = adRepository.findById(ad);
-        advertisement.ifPresent(file::setAdvertisement);
         file.setOriginalName(multipartFile.getOriginalFilename());
         file.setSize(multipartFile.getSize());
         file.setType(multipartFile.getContentType());
@@ -41,19 +37,9 @@ public class FileServiceImpl implements FileService{
         return repository.findById(id);
     }
 
-    public Optional<FileEntity> findByAdAndId(Long ad, Long id) {
-        Optional<JobAdvertisement> optional = adRepository.findById(ad);
-        return optional.flatMap(advertisement -> repository.findByAdvertisementAndId(advertisement, id));
-    }
-
-    public Optional<FileEntity> findByAdAndName(Long ad, String name) {
-        Optional<JobAdvertisement> optional = adRepository.findById(ad);
-        return optional.flatMap(advertisement -> repository.findByAdvertisementAndName(advertisement, name));
-    }
-
     @Override
-    public FileEntity downloadById(Long ad, Long id) {
-        Optional<FileEntity> file = findByAdAndId(ad, id);
+    public FileEntity downloadById(Long id) {
+        Optional<FileEntity> file = findById(id);
         if (file.isPresent()) {
             return file.get();
         }
@@ -61,7 +47,12 @@ public class FileServiceImpl implements FileService{
     }
 
     @Override
-    public FileEntity downloadByName(Long ad, String name) {
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public FileEntity downloadByName(String name) {
         Optional<FileEntity> file = repository.findByName(name);
         if (file.isPresent()) {
             return file.get();

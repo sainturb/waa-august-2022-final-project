@@ -25,24 +25,31 @@ public class FileController {
     private final FileServiceImpl service;
     private final FilesStorageServiceImpl storage;
 
-    @PostMapping("/upload/{ad}")
-    public FileEntity uploadFile(@PathVariable Long ad, @RequestParam("file") MultipartFile multipartFile) throws IOException {
-        FileEntity fileEntity = service.upload(ad, multipartFile);
+    @PostMapping("/upload")
+    public FileEntity uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+        FileEntity fileEntity = service.upload(multipartFile);
         storage.save(fileEntity.getName(), multipartFile);
         return fileEntity;
     }
 
-    @GetMapping("/download/{ad}/{id}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable Long ad, @PathVariable Long id) throws IOException {
-        FileEntity fileEntity = service.downloadById(ad, id);
-        return downloadFileByName(ad, fileEntity.getName());
+    @GetMapping("/download/{id}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable Long id) throws IOException {
+        FileEntity fileEntity = service.downloadById(id);
+        return downloadFileByName(fileEntity.getName());
     }
 
-    @GetMapping("/download/location/{ad}/{name}")
-    public ResponseEntity<Resource> downloadFileByName(@PathVariable Long ad, @PathVariable String name) throws IOException {
+    @GetMapping("/download/location/{name}")
+    public ResponseEntity<Resource> downloadFileByName(@PathVariable String name) throws IOException {
         Resource file = storage.load(name);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
                         "attachment; filename=\"" + name + "\"").body(file);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteFile(@PathVariable Long id) throws IOException {
+        FileEntity fileEntity = service.downloadById(id);
+        service.deleteById(id);
+        storage.delete(fileEntity.getName());
     }
 }
