@@ -12,10 +12,10 @@ Create dashboard pages for students and faculty:
 --- 
 * ✅ (Completed) Faculty/Students can register to the system.
 * ✅ (Completed) Faculty/Students can only edit their own profile information.
-* ✅ (Completed files missing) Students can add job advertisements.
+* ✅ (Completed) Students can add job advertisements.
 	* ✅ (Completed) Can upload pictures/files of the job.
 	* Optional: Use cloud services like Amazon S3 or Google Cloud Storage.
-* ✅ (Completed files missing) Students can only edit their own job advertisements.
+* ✅ (Completed) Students can only edit their own job advertisements.
 * ✅ (Completed) Students can apply to the jobs.
 	* ✅ (Completed) Student's CV will be also visible to owners of the job advertisements that the student has applied.
 * ✅ (Completed) Students and Faculty can filter job advertisements:
