@@ -48,3 +48,18 @@ services:
       - ./realm-export.json://opt/jboss/keycloak/imports/realm-export.json
     depends_on:
       - keycloak-db
+  # frontend:
+  #   image: nginx
+  #   build: ./webapp
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://main-db:5432/alumni_db
+      KEYCLOAK_AUTH_SERVER_URL: http://keycloak:8081/auth
+    depends_on:
+      - keycloak

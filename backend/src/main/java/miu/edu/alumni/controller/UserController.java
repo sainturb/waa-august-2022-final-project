@@ -23,34 +23,31 @@ public class UserController {
     @GetMapping("{type}/{id}")
     public ResponseEntity<?> getByUserId(@PathVariable String type, @PathVariable String id) {
         switch (type) {
-            case "faculty" ->  {
-                return facultyService.findByUserId(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-            }
-            case "student" -> {
-                return studentService.findByUserId(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-            }
+            case "faculty": return facultyService.findByUserId(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+            case "student": return studentService.findByUserId(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
     @PostMapping("create-current-user/{type}")
     public void getByUserId(@PathVariable String type, @RequestBody Map<String, String> body) {
         switch (type) {
-            case "faculty" ->  {
+            case "faculty" :
                 Faculty faculty = new Faculty();
                 faculty.setUserId(body.get("userId"));
                 faculty.setFirstName(body.get("firstName"));
                 faculty.setLastname(body.get("lastname"));
                 faculty.setEmail(body.get("email"));
                 facultyService.findByUserId(faculty.getUserId()).orElseGet(() -> facultyService.save(faculty));
-            }
-            case "student" -> {
+                break;
+            case "student":
                 Student student = new Student();
                 student.setUserId(body.get("userId"));
                 student.setFirstName(body.get("firstName"));
                 student.setLastname(body.get("lastname"));
                 student.setEmail(body.get("email"));
                 studentService.findByUserId(student.getUserId()).orElseGet(() -> studentService.save(student));
-            }
+                break;
+
         }
     }
 
