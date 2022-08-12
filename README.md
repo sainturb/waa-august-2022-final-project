@@ -13,7 +13,7 @@ Create dashboard pages for students and faculty:
 * ✅ (Completed) Faculty/Students can register to the system.
 * ✅ (Completed) Faculty/Students can only edit their own profile information.
 * ✅ (Completed files missing) Students can add job advertisements.
-	* ✅ (API is ready to use) Can upload pictures/files of the job.
+	* ✅ (Completed) Can upload pictures/files of the job.
 	* Optional: Use cloud services like Amazon S3 or Google Cloud Storage.
 * ✅ (Completed files missing) Students can only edit their own job advertisements.
 * ✅ (Completed) Students can apply to the jobs.
@@ -28,7 +28,7 @@ Create dashboard pages for students and faculty:
 	* ✅ (Completed) by city.
 	* ✅ (Completed) by major.
 	* ✅ (Completed) by name.
-	* by student id.
+	* ✅ (Completed) by student id.
 * ✅ (Completed) Auto-complete tags while typing.
 * Faculty can write comments on students.
 	* Only faculty can see the comments.

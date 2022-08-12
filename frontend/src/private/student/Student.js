@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {STATES} from "../../constants/States";
+import ReadComments from "./ReadComments";
 
 function Student () {
     const states = STATES;
@@ -152,31 +153,34 @@ function Student () {
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" className="py-3 px-6">
+                        <th scope="col" className="p-3">
                             Fullname
                         </th>
-                        <th scope="col" className="py-3 px-6">
+                        <th scope="col" className="p-3">
                             Email
                         </th>
-                        <th scope="col" className="py-3 px-6">
+                        <th scope="col" className="p-3">
                             State
                         </th>
-                        <th scope="col" className="py-3 px-6">
+                        <th scope="col" className="p-3">
                             City
                         </th>
-                        <th scope="col" className="py-3 px-6">
+                        <th scope="col" className="p-3">
                             Zip
                         </th>
-                        <th scope="col" className="py-3 px-6">
+                        <th scope="col" className="p-3">
                             Major
                         </th>
-                        <th scope="col" className="py-3 px-6">
+                        <th scope="col" className="p-3">
                             GPA
                         </th>
-                        <th scope="col" className="py-3 px-6">
+                        <th scope="col" className="p-3">
+                            Comments
+                        </th>
+                        <th scope="col" className="p-3">
                             Status
                         </th>
-                        <th scope="col" className="py-3 px-6">
+                        <th scope="col" className="p-3">
                             <span className="sr-only">Action</span>
                         </th>
                     </tr>
@@ -189,28 +193,31 @@ function Student () {
                                     <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {student.firstName} {student.lastname}
                                     </th>
-                                    <td className="py-4 px-6">
+                                    <td className="p-3">
                                         {student.email}
                                     </td>
-                                    <td className="py-4 px-6">
+                                    <td className="p-3">
                                         {student.state}
                                     </td>
-                                    <td className="py-4 px-6">
+                                    <td className="p-3">
                                         {student.city}
                                     </td>
-                                    <td className="py-4 px-6">
+                                    <td className="p-3">
                                         {student.zipCode}
                                     </td>
-                                    <td className="py-4 px-6">
+                                    <td className="p-3">
                                         {student.major ? student.major.name : ''}
                                     </td>
-                                    <td className="py-4 px-6">
+                                    <td className="p-3">
                                         {student.gpa}
                                     </td>
-                                    <td className="py-4 px-6">
+                                    <td className="p-3">
+                                        <ReadComments student={student} />
+                                    </td>
+                                    <td className="p-3">
                                         {student.is_deleted ? (<span className="font-medium text-gray-600 dark:text-gray-500 ">Deleted</span>) : (<span className="font-medium text-green-600 dark:text-green-500 ">Active</span>)}
                                     </td>
-                                    <td className="py-4 px-6 text-right">
+                                    <td className="p-3 text-right">
                                         <button
                                             onClick={() => onDelete(student)}
                                             className="font-medium  ml-2 text-orange-600 dark:text-orange-500 hover:underline">Delete</button>

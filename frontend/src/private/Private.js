@@ -29,8 +29,11 @@ function Private () {
         error => {
             const {status} = error.response;
             if (status === 401) {
-                // logout();
                 auth.redirectSignIn();
+            } else  if (error.response.status === 403) {
+                alert('You don\'t have any access to see this information');
+            } else {
+                alert(error.message);
             }
             return Promise.reject(error);
         }

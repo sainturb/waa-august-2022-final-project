@@ -22,8 +22,7 @@ public class Comment {
     private Instant createdDate;
     @CreatedBy
     private String createdBy;
-    @ManyToOne
-    @JoinColumn(name = "history_id")
-    private JobHistory history;
 
+    @ManyToOne
+    private Student student;
 }

@@ -33,9 +33,6 @@ public class JobHistory {
     @CreatedDate
     private Instant createdDate;
 
-    @OneToMany(mappedBy = "history", fetch = FetchType.LAZY)
-    private List<Comment> comments;
-
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags;
 }

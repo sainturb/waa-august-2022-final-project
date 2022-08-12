@@ -6,6 +6,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,4 +23,8 @@ public class Student extends Person {
     @ManyToMany(mappedBy = "applied", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<JobAdvertisement> appliedTo;
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Comment> comments = new ArrayList<>();
 }
