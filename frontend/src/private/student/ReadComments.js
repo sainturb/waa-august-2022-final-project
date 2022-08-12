@@ -4,11 +4,26 @@ import axios from "axios";
 function ReadComments ({student}) {
     const [dialog, setDialog] = useState(false);
     const [comments, setComments] = useState([]);
-    const onRead = () => {
-        showDialog();
+    const [content, setContent] = useState('');
+
+    const fetch = () => {
         axios.get('/api/comments/' + student.id).then(response => {
             if (response.data) {
                 setComments(response.data)
+            }
+        });
+    }
+    const onRead = () => {
+        showDialog();
+        fetch();
+    }
+
+    const addComment = () => {
+        const body = {content, student}
+        axios.post('/api/comments', body).then(response => {
+            if (response.data) {
+                setContent('');
+                fetch();
             }
         });
     }
@@ -40,6 +55,17 @@ function ReadComments ({student}) {
                                                 <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white"
                                                     id="modal-title">Comments</h3>
                                                 <div className="mt-2 relative">
+                                                    <div className="mb-2">
+                                                        <textarea placeholder="New comment"
+                                                                  value={content}
+                                                                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                  onChange={(event) => setContent(event.target.value)}
+                                                        ></textarea>
+                                                        <button
+                                                            onClick={() => addComment()}
+                                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-2 sm:w-auto sm:text-sm">Send
+                                                        </button>
+                                                    </div>
                                                     <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
                                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                         <tr>
