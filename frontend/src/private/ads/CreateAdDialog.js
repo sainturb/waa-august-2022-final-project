@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {STATES} from "../../constants/States";
 import ReactTags from "./ReactTags";
+import Files from "./Files";
 
 function CreateAdDialog({buttonText, fetch, editBody}) {
     const [body, setBody] = useState(editBody ? editBody : {
@@ -51,10 +52,20 @@ function CreateAdDialog({buttonText, fetch, editBody}) {
     const onDelete = (tagIndex) => {
         setBody({...body, tags: body.tags.filter((_, i) => i !== tagIndex)});
     };
+
+    const onAddFiles = (file) => {
+        body.files.push(file);
+        setBody({...body, files: body.files});
+    }
+
+    const onRemoveFiles = (file) => {
+        body.files.splice(body.files.findIndex(f => f.id === file.id), 1);
+        setBody({...body, files: body.files});
+    }
+
     useEffect(() => {
         fetchTagSuggestions();
     }, [])
-
 
     return (
         <div className="mb-2">
@@ -155,6 +166,13 @@ function CreateAdDialog({buttonText, fetch, editBody}) {
                                                                 noSuggestionsText="No matching tags"
                                                                 onAddition={onAddition}
                                                                 onDelete={onDelete}
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <Files
+                                                                files={body.files}
+                                                                onAdd={onAddFiles}
+                                                                onRemove={onRemoveFiles}
                                                             />
                                                         </div>
                                                     </div>

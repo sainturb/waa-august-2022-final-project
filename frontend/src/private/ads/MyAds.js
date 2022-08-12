@@ -88,7 +88,7 @@ function MyAds () {
                                         {ad.applied.length}
                                     </td>
                                     <td className="py-4 px-3">
-                                        {ad.files}
+                                        {ad.files.length}
                                     </td>
                                     <td className="py-4 px-3">
                                         {ad.tags ? ad.tags.map(t => {
