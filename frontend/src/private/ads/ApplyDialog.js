@@ -29,26 +29,27 @@ function ApplyDialog({ad, fetch}) {
 
     const save = (event) => {
         event.preventDefault();
-        axios.post(`/api/advertisements/apply/${ad.id}`, body).then(response => {
-            fetch();
-            hideDialog();
-        });
-    }
-    useEffect(() => {
         axios.get(`/api/users/${body.type}/${body.userId}`).then(response => {
             if (response.data) {
-                setBody({
-                    ...body,
-                    id: response.data.id,
-                    zipCode: response.data.zipCode,
-                    address: response.data.address,
-                    state: response.data.state,
-                    city: response.data.city,
-                    gpa: response.data.gpa,
-                    major: response.data.major
+                // setBody({
+                //     ...body,
+                //     id: response.data.id,
+                //     zipCode: response.data.zipCode,
+                //     address: response.data.address,
+                //     state: response.data.state,
+                //     city: response.data.city,
+                //     gpa: response.data.gpa,
+                //     major: response.data.major
+                // });
+                axios.post(`/api/advertisements/apply/${ad.id}`, response.data).then(response => {
+                    fetch();
+                    hideDialog();
                 });
             }
         });
+
+    }
+    useEffect(() => {
     }, [])
 
 

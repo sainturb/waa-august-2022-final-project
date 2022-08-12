@@ -220,10 +220,10 @@ function Ads () {
                                         {ad.createdBy}
                                     </td>
                                     <td className="py-4 px-3">
-                                        {ad.applied.length}
+                                        {ad.applied.length} applied
                                     </td>
                                     <td className="py-4 px-3">
-                                        {ad.files.length}
+                                        {ad.files.length} uploaded
                                     </td>
                                     <td className="py-4 px-3">
                                         {ad.tags ? ad.tags.map(t => {

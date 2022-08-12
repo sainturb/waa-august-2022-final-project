@@ -33,7 +33,7 @@ function Private () {
             } else  if (error.response.status === 403) {
                 alert('You don\'t have any access to see this information');
             } else {
-                alert(error.message);
+
             }
             return Promise.reject(error);
         }
