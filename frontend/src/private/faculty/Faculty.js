@@ -36,7 +36,6 @@ function Faculty() {
                 params[key] = filter[key];
             }
         });
-        console.log(params);
         axios.get(`/api/faculties/filter`, {params}).then(response => {
             if (response.data) {
                 setFaculties(response.data);
@@ -57,7 +56,6 @@ function Faculty() {
         const yes = window.confirm('Do you want to continue this action?');
         if (yes) {
             axios.delete('/api/faculties/' + faculty.id).then(res => {
-                console.log(res);
                 alert('deleted');
             });
         }

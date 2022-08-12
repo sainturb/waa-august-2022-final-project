@@ -69,6 +69,9 @@ function ReadComments ({student}) {
                                                     <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
                                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                         <tr>
+                                                            <th scope="col" className="py-3 px-2">
+                                                                Student
+                                                            </th>
                                                             <th scope="col" className="py-3 px-2 w">
                                                                 Comment
                                                             </th>
@@ -85,9 +88,12 @@ function ReadComments ({student}) {
                                                             comments.map(record => {
                                                                 return (
                                                                     <tr key={record.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                                                        <th scope="row" className="p-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                        <td className="p-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                            {record.student.firstName}
+                                                                        </td>
+                                                                        <td className="p-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                                             {record.content}
-                                                                        </th>
+                                                                        </td>
                                                                         <td className="p-2">
                                                                             {record.createdBy}
                                                                         </td>

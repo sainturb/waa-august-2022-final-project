@@ -30,8 +30,8 @@ Create dashboard pages for students and faculty:
 	* ✅ (Completed) by name.
 	* ✅ (Completed) by student id.
 * ✅ (Completed) Auto-complete tags while typing.
-* Faculty can write comments on students.
-	* Only faculty can see the comments.
+* ✅ (Completed) Faculty can write comments on students.
+	* ✅ (Completed) Only faculty can see the comments.
 * ✅ (Completed) Students can add their professional job experiences.
 * ✅ (Keycloak) Admin can Activate/Deactivate students and faculty.
 * ✅ (Keycloak) Admin can reset passwords.
