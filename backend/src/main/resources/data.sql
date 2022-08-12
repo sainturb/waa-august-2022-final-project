@@ -57,6 +57,12 @@ insert into person (email, first_name, lastname, last_logged_in_at, address, sta
 insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, user_id, major_id) values ('bpeaddie1c@bloomberg.com', 'Berty', 'Peaddie', '2022-01-18T06:58:41Z', '8736 Burning Wood Place', 'Montana', 'Billings', '59112', 2.8, 'student', false, 49, 6);
 insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, user_id, major_id) values ('lblackley1d@qq.com', 'Libbie', 'Blackley', '2021-11-27T11:52:01Z', '55 Declaration Road', 'Florida', 'Saint Petersburg', '33715', 3.9, 'student', false, 50, 6);
 
+INSERT INTO comment("content", "created_by", "created_date", "student_id")VALUES('Good student', 'faculty', '2021-12-07T18:12:47Z', 1);
+INSERT INTO comment("content", "created_by", "created_date", "student_id")VALUES('Late student', 'faculty', '2021-12-07T18:12:47Z', 2);
+INSERT INTO comment("content", "created_by", "created_date", "student_id")VALUES('Excellent student', 'faculty', '2021-12-07T18:12:47Z', 3);
+INSERT INTO comment("content", "created_by", "created_date", "student_id")VALUES('Good student', 'faculty', '2021-12-07T18:12:47Z', 4);
+INSERT INTO comment("content", "created_by", "created_date", "student_id")VALUES('Hard working student', 'faculty', '2021-12-07T18:12:47Z', 5);
+
 INSERT INTO job_advertisement(created_by, company, state, city, benefit, description, posted, salary, title)
 VALUES('student','Facebook', 'California','San Francisco','High Salary', 'Senior UX Developer, Web Experience at Indeed Senior UX Developers, Web Experience at Indeed serve a critical role in getting designs into production, bridging the design and engineering organizations. Senior UX Developers work with a cross-functional team to build accessible user interfaces for our products; create fast, scalable, maintainable, and secure systems; define best practices in UI development; and contribute to design ideation and decision making', '2022-07-09 17:22:49.828', 184000, 'Senior UX Developer, Web Experience');
 INSERT INTO job_advertisement(created_by, company, state, city, benefit, description, posted, salary, title)
