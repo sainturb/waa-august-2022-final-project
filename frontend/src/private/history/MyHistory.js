@@ -60,7 +60,7 @@ function MyHistory () {
                                         {record.reasonToLeave}
                                     </td>
                                     <td className="py-4 px-6">
-                                        {record.comments.length}
+                                        {record.comments ? record.comments.length : 0}
                                     </td>
                                     <td className="py-4 px-6">
                                         <CreateHistoryDialog buttonText={'Edit'} fetch={fetch} editBody={record}/>

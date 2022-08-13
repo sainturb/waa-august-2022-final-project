@@ -134,7 +134,7 @@ function History () {
                                         {record.reasonToLeave}
                                     </td>
                                     <td className="py-4 px-6">
-                                        {record.comments}
+                                        {record.comments ? record.comments.length : 0}
                                     </td>
                                 </tr>
                             )

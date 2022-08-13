@@ -1,16 +1,13 @@
 package miu.edu.alumni.service;
 
 import miu.edu.alumni.model.JobAdvertisement;
-import miu.edu.alumni.model.JobHistory;
 import miu.edu.alumni.model.Student;
 import miu.edu.alumni.model.Tag;
-import miu.edu.alumni.repository.FileRepository;
 import miu.edu.alumni.repository.JobAdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
 import javax.persistence.criteria.*;
 import java.util.*;
 import java.util.stream.Collectors;

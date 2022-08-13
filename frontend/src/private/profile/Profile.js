@@ -57,7 +57,7 @@ function Profile() {
             }
         })
         if (user.type) {
-            axios.get(`/api/users/${user.type}/${user.userId}`).then(response => {
+            axios.get(`/api/users/${user.type}/${user.email}`).then(response => {
                 if (response.data) {
                     setUser({
                         ...user,

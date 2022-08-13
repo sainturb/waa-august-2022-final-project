@@ -58,7 +58,7 @@ The system will send randomly generated code to the user's email address.
 #### Notifications
 ---
 * AppliedToTheJob: To the owner of the job advertisement when a student has applied to the job.
-* NewJobPoster: To all students who are interested in job poster's tags get a notification about the job.
+* ✅ (Completed) NewJobPoster: To all students who are interested in job poster's tags get a notification about the job.
 
 #### Sample Domain Models
 ---
