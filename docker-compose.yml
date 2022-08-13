@@ -1,43 +1,71 @@
 version: '3'
 
-# volumes:
-#   postgres_data:
-#       driver: local
-
 services:
-  postgres:
+  keycloak-db:
     image: postgres
-    container_name: postgres
-    hostname: postgres
+    container_name: keycloak-db
     restart: always
-    volumes:
-      - ./DB.sh:/docker-entrypoint-initdb.d/init-database.sh
-    #   - postgres_data:/var/lib/postgresql/data
+    expose:
+      - 5433
     ports:
-      - 5432:5432
+      - 5433:5433
+    command: -p 5433
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
   keycloak: 
     image: quay.io/keycloak/keycloak:legacy
     container_name: keycloak
     restart: always
+    command: 
+      - "-b 0.0.0.0 -Djboss.socket.binding.port-offset=1 -Djboss.bind.address.private=127.0.0.1 -Djboss.bind.address=0.0.0.0 -Djgroups.bind_addr=127.0.0.1 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     ports: 
-      - 8081:8080
+      - 8081:8081
     environment:
       DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
+      DB_ADDR: keycloak-db
+      DB_PORT: 5433
+      DB_DATABASE: postgres
       DB_USER: postgres
-      DB_SCHEMA: public
       DB_PASSWORD: postgres
-      # KEYCLOAK_USER: admin
-      # KEYCLOAK_PASSWORD: admin
-      KEYCLOAK_IMPORT: /tmp/realm-export.json
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
     volumes:
-      - ./realm-export.json:/tmp/realm-export.json
+      - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
     depends_on:
-      - postgres
-
-  
+      - keycloak-db
+  main-db:
+    image: postgres
+    container_name: main-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: alumni_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://main-db:5432/alumni_db
+      KEYCLOAK_AUTH_SERVER_URL: http://kubernetes.docker.internal:8081/auth
+    depends_on:
+      - main-db
+      - keycloak-db
+      - keycloak
+    extra_hosts:
+      - "keycloak:127.0.0.1"
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000

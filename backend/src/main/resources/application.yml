@@ -41,4 +41,4 @@ keycloak:
   realm: alumni
   resource: alumni
   principal-attribute: preferred_username
-#  use-resource-role-mappings : true
+  ssl-required: none

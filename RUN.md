@@ -1,19 +1,39 @@
-1.a For Mac OS
+#For Mac OS or Linux
 
 ```
 chmod 755 ./DB.sh
+sudo -- sh -c "echo 127.0.0.1 kubernetes.docker.internal >> /etc/hosts"
 ```
 
-1.b For Windows OS d
+#For Windows OS
 
-
-2. RUN docker services
+- For windows some mount folder or files dir may require update
 
 ```
-docker-compose up -d || docker-compose -f docker-compose-windows.yml up -d
+- Window + R
+notepad c:\windows\system32\drivers\etc\hosts
+
+- add following line
+127.0.0.1 kubernetes.docker.internal
 ```
 
-Warning!
+
+#RUN all docker services
+
+```
+docker-compose up -d
+```
+
+#RUN on local
+```
+docker-compose -f docker-compose-double-db.yml up -d
+
+cd /backend && ./mvnw package && ./mvnw spring-boot:run
+
+cd /frontend && npm install && npm run start
+```
+
+##Warning!
 
 If it's first time running docker-compose uncomment KEYCLOAK_USER, KEYCLOAK_PASSWORD
 Otherwise, run with commenting KEYCLOAK_USER, KEYCLOAK_PASSWORD

@@ -60,7 +60,7 @@ public class JobAdServiceImpl implements JobAdService {
             for (String key : params.keySet()) {
                 if (key.equals("tags")) {
                     String valueText = (String) params.get(key);
-                    specification = specification.and(valueIn(Arrays.stream(valueText.split(",")).toList()));
+                    specification = specification.and(valueIn(Arrays.stream(valueText.split(",")).collect(Collectors.toList())));
                 } else {
                     specification = specification.and(valueEquals(key, params.get(key)));
                 }
