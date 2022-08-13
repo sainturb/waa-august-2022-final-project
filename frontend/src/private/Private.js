@@ -13,7 +13,7 @@ import Navbar from '../public/Navbar';
 import MyHistory from "./history/MyHistory";
 import MyAds from "./ads/MyAds";
 import AppliedStudents from "./ads/AppliedStudents";
-import Notification from "./Notification";
+import Notification from "./notification/Notification";
 
 function Private() {
     const [titleState, setTitleState] = useState('Default Title');
