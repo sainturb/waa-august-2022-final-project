@@ -54,10 +54,10 @@ public class WebConfig implements WebMvcConfigurer {
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "MIU ALUMNI API", //title
-                ".", //description
+                "For the purpose of education at MIU", //description
                 "Version 1.0", //version
                 "Terms of service", //terms of service URL
-                new Contact("Bhanuka Dissanayake", "www.example.com", "myeaddress@company.com"),
+                null,
                 "License of API", "API license URL", Collections.emptyList()); // contact info
     }
 }
