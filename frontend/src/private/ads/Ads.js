@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
-import ReactTags from "./ReactTags";
+import ReactTags from "../shared/ReactTags";
 import {useAuth} from "../../App";
 import ApplyDialog from "./ApplyDialog";
 
@@ -9,8 +9,6 @@ function Ads () {
     const [ads, setAds] = useState([]);
     const [query, setQuery] = useState('');
     const [filter, setFilter] = useState({state: '', city: '', company: '', tags: [] });
-
-    const [tagSuggestions, setTagSuggestions] = useState([]);
 
     const fetchAds = () => {
         axios.get('/api/advertisements/filter').then(response => {
@@ -47,14 +45,6 @@ function Ads () {
         });
     };
 
-    const fetchTagSuggestions = () => {
-        axios.get('api/tags').then(response => {
-            if(response.data) {
-                setTagSuggestions(response.data);
-            }
-        });
-    };
-
     const onAddition = (newTag) => {
         setFilter({...filter, tags: [...filter.tags, newTag]});
     };
@@ -81,7 +71,6 @@ function Ads () {
 
     useEffect(() => {
         fetchAds();
-        fetchTagSuggestions();
     }, [])
 
     return (
@@ -126,7 +115,6 @@ function Ads () {
                         <ReactTags
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             tags={filter.tags}
-                            suggestions={tagSuggestions}
                             noSuggestionsText="No matching tags"
                             onAddition={onAddition}
                             onDelete={onDelete}

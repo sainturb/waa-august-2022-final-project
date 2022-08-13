@@ -35,7 +35,7 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         KeycloakAuthenticationProvider keycloakAuthenticationProvider
                 = keycloakAuthenticationProvider();
         SimpleAuthorityMapper mapper = new SimpleAuthorityMapper();
-        mapper.setPrefix("");
+        mapper.setPrefix(""); // faculty ROLE_faculty
         keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(mapper);
         auth.authenticationProvider(keycloakAuthenticationProvider);
     }
@@ -54,9 +54,6 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         http
                 .cors().and()
                 .csrf().disable()
-//                .requestMatchers()
-
-//                .and()
                 .authorizeRequests()
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/swagger-resources/configuration/ui").permitAll()
@@ -66,8 +63,6 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .antMatchers("webjars/**").permitAll()
                 .antMatchers("/public/**").permitAll()
                 .antMatchers("/api/**").authenticated()
-//                .anyRequest()
-//                .authenticated()
                 ;
         // @formatter:on
     }

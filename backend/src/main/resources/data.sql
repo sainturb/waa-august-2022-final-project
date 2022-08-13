@@ -18,10 +18,10 @@ INSERT INTO tag("name")VALUES('web-development');
 INSERT INTO tag("name")VALUES('react');
 INSERT INTO tag("name")VALUES('spring-boot');
 
+insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, department_id)
+values ('faculty@miu.edu', 'faculty', 'faculty', '2021-11-27T11:52:01Z', '55 Declaration Road', 'Florida', 'Saint Petersburg', '33715', 3.9, 'faculty', false, 4);
 insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, major_id)
-values ('faculty@miu.edu', 'faculty', 'faculty', '2021-11-27T11:52:01Z', '55 Declaration Road', 'Florida', 'Saint Petersburg', '33715', 3.9, 'faculty', false, 6);
-insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, major_id)
-values ('student@miu.edu', 'student', 'student', '2021-11-27T11:52:01Z', '55 Declaration Road', 'Florida', 'Saint Petersburg', '33715', 3.9, 'student', false, 6);
+values ('student@miu.edu', 'student', 'student', '2021-11-27T11:52:01Z', '55 Declaration Road', 'Florida', 'Saint Petersburg', '33715', 3.9, 'student', false, 3);
 
 
 insert into person_tags (users_id, tags_id) values (1, 1);

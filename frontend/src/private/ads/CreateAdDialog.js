@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {STATES} from "../../constants/States";
-import ReactTags from "./ReactTags";
+import ReactTags from "../shared/ReactTags";
 import Files from "./Files";
 
 function CreateAdDialog({buttonText, fetch, editBody}) {

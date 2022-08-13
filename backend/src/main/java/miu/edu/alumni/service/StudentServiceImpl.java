@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -44,8 +45,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student save(Student student) {
         Student created = repository.save(student);
-        RoleRepresentation roleRepresentation = keycloak.findRoleByName("student");
-        keycloak.assignRole(student.getUserId(), roleRepresentation);
+        if (Objects.nonNull(student.getId())) {
+            RoleRepresentation roleRepresentation = keycloak.findRoleByName("student");
+            keycloak.assignRole(student.getUserId(), roleRepresentation);
+        }
         return created;
     }
 

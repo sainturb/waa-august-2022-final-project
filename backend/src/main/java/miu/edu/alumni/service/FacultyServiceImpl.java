@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -46,8 +43,10 @@ public class FacultyServiceImpl implements FacultyService {
     @Override
     public Faculty save(Faculty faculty) {
         Faculty created = repository.save(faculty);
-        RoleRepresentation roleRepresentation = keycloak.findRoleByName("faculty");
-        keycloak.assignRole(faculty.getUserId(), roleRepresentation);
+        if (Objects.nonNull(faculty.getId())) {
+            RoleRepresentation roleRepresentation = keycloak.findRoleByName("faculty");
+            keycloak.assignRole(faculty.getUserId(), roleRepresentation);
+        }
         return created;
     }
 

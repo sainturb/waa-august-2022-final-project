@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useAuth} from "../../App";
 import axios from "axios";
 import {STATES} from "../../constants/States";
+import ReactTags from "../shared/ReactTags";
 
 function Profile() {
     const auth = useAuth();
@@ -22,6 +23,7 @@ function Profile() {
         active: true,
         department: {},
         major: {},
+        tags: []
     });
     const [departments, setDepartments] = useState([]);
     const onChange = (event) => {
@@ -50,6 +52,15 @@ function Profile() {
         }
     }
 
+    const onAddition = (newTag) => {
+        setUser({...user, tags: [...user.tags, newTag]});
+    };
+
+    const onDelete = (tagIndex) => {
+        setUser({...user, tags: user.tags.filter((_, i) => i !== tagIndex)});
+    };
+
+
     const getUser = () => {
         axios.get(`/api/departments`).then(response => {
             if (response.data) {
@@ -69,6 +80,7 @@ function Profile() {
                         gpa: response.data.gpa ? response.data.gpa : 0,
                         departmentId: response.data.department ? response.data.department.id : undefined,
                         majorId: response.data.major ? response.data.major.id : undefined,
+                        tags: response.data.tags
                     });
                 }
             });
@@ -232,6 +244,17 @@ function Profile() {
                                     </div>
                                 ) : ''
                         }
+                        <div>
+                            <label
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Interested</label>
+                            <ReactTags
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                tags={user.tags}
+                                noSuggestionsText="No matching tags"
+                                onAddition={onAddition}
+                                onDelete={onDelete}
+                            />
+                        </div>
                     </div>
                     <button type="submit"
                             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save
