@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
   jackson:
     serialization:
       write_dates_as_timestamps: false
