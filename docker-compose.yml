@@ -36,6 +36,11 @@ services:
       - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
     depends_on:
       - keycloak-db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/auth/"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
   main-db:
     image: postgres
     container_name: main-db
@@ -57,9 +62,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://main-db:5432/alumni_db
       KEYCLOAK_AUTH_SERVER_URL: http://kubernetes.docker.internal:8081/auth
     depends_on:
-      - main-db
-      - keycloak-db
-      - keycloak
+      keycloak:
+        condition: service_healthy
     extra_hosts:
       - "keycloak:127.0.0.1"
   frontend:
