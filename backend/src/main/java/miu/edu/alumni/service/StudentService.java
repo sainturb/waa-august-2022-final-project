@@ -10,6 +10,8 @@ public interface StudentService {
     List<Student> findAll();
     Optional<Student> findById(Long id);
     Optional<Student> findByUserId(String id);
+
+    Optional<Student> findByEmail(String email);
     Student save(Student student);
     void delete(Long id);
 

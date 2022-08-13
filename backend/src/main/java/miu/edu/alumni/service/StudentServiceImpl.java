@@ -37,6 +37,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Optional<Student> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    @Override
     public Student save(Student student) {
         Student created = repository.save(student);
         RoleRepresentation roleRepresentation = keycloak.findRoleByName("student");

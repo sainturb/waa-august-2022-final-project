@@ -43,5 +43,5 @@ keycloak:
   auth-server-url: http://localhost:8081/auth
   realm: alumni
   resource: alumni
-  principal-attribute: preferred_username
+  principal-attribute: email
   ssl-required: none

@@ -21,10 +21,13 @@ public class Tag {
     @JsonIgnore
     private List<JobAdvertisement> advertisements= new ArrayList<>();
 
-
     @ManyToMany(mappedBy="tags", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<JobHistory> histories = new ArrayList<>();
+
+    @ManyToMany(mappedBy="tags", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Person> users = new ArrayList<>();
 
     @Override
     public String toString() {

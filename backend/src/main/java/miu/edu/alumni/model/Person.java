@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,4 +28,7 @@ public class Person {
     private String state;
     private String city;
     private String zipCode;
+
+    @ManyToMany()
+    private List<Tag> tags;
 }

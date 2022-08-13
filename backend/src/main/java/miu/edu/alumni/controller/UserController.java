@@ -23,8 +23,8 @@ public class UserController {
     @GetMapping("{type}/{id}")
     public ResponseEntity<?> getByUserId(@PathVariable String type, @PathVariable String id) {
         switch (type) {
-            case "faculty": return facultyService.findByUserId(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-            case "student": return studentService.findByUserId(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+            case "faculty": return facultyService.findByEmail(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+            case "student": return studentService.findByEmail(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -37,7 +37,12 @@ public class UserController {
                 faculty.setFirstName(body.get("firstName"));
                 faculty.setLastname(body.get("lastname"));
                 faculty.setEmail(body.get("email"));
-                facultyService.findByUserId(faculty.getUserId()).orElseGet(() -> facultyService.save(faculty));
+                facultyService.findByEmail(faculty.getEmail())
+                        .map(found -> {
+                            found.setUserId(body.get("userId"));
+                            return facultyService.save(found);
+                        })
+                        .orElseGet(() -> facultyService.save(faculty));
                 break;
             case "student":
                 Student student = new Student();
@@ -45,7 +50,12 @@ public class UserController {
                 student.setFirstName(body.get("firstName"));
                 student.setLastname(body.get("lastname"));
                 student.setEmail(body.get("email"));
-                studentService.findByUserId(student.getUserId()).orElseGet(() -> studentService.save(student));
+                studentService.findByEmail(student.getEmail())
+                        .map(found -> {
+                            found.setUserId(body.get("userId"));
+                            return studentService.save(found);
+                        })
+                        .orElseGet(() -> studentService.save(student));
                 break;
 
         }

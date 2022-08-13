@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.mail.Message;
 import javax.persistence.criteria.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,9 +21,15 @@ public class JobAdServiceImpl implements JobAdService {
     @Autowired
     private JobAdvertisementRepository jobAdRepo;
 
+    @Autowired
+    MessageServiceImpl messageService;
+
     @Override
     public JobAdvertisement save(JobAdvertisement jobAd) {
         JobAdvertisement created = jobAdRepo.save(jobAd);
+        jobAd.getTags().forEach(tag -> {
+            messageService.sendNewAd(tag.getName());
+        });
         return created;
     }
 

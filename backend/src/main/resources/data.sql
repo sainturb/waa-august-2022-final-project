@@ -6,6 +6,33 @@ INSERT INTO department("name")VALUES('Software');
 INSERT INTO department("name")VALUES('Mobile');
 INSERT INTO department("name")VALUES('Design');
 
+INSERT INTO tag("name")VALUES('javascript');
+INSERT INTO tag("name")VALUES('java');
+INSERT INTO tag("name")VALUES('front-end');
+INSERT INTO tag("name")VALUES('back-end');
+INSERT INTO tag("name")VALUES('rest-api');
+INSERT INTO tag("name")VALUES('python');
+INSERT INTO tag("name")VALUES('security');
+INSERT INTO tag("name")VALUES('ux-ui');
+INSERT INTO tag("name")VALUES('web-development');
+INSERT INTO tag("name")VALUES('react');
+INSERT INTO tag("name")VALUES('spring-boot');
+
+insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, major_id)
+values ('faculty@miu.edu', 'faculty', 'faculty', '2021-11-27T11:52:01Z', '55 Declaration Road', 'Florida', 'Saint Petersburg', '33715', 3.9, 'faculty', false, 6);
+insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, major_id)
+values ('student@miu.edu', 'student', 'student', '2021-11-27T11:52:01Z', '55 Declaration Road', 'Florida', 'Saint Petersburg', '33715', 3.9, 'student', false, 6);
+
+
+insert into person_tags (users_id, tags_id) values (1, 1);
+insert into person_tags (users_id, tags_id) values (1, 2);
+insert into person_tags (users_id, tags_id) values (1,3);
+
+insert into person_tags (users_id, tags_id) values (2, 2);
+insert into person_tags (users_id, tags_id) values (2, 4);
+insert into person_tags (users_id, tags_id) values (2, 5);
+
+
 insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, user_id, major_id) values ('asauvain0@behance.net', 'Arlen', 'Sauvain', '2021-12-07T18:12:47Z', '0 Dorton Way', 'Pennsylvania', 'Pittsburgh', '15210', 2.1, 'student', false, 1, 1);
 insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, user_id, major_id) values ('snetley1@gizmodo.com', 'Seward', 'Netley', '2022-04-28T04:51:19Z', '64 Russell Point', 'Oregon', 'Portland', '97240', 3.7, 'student', false, 2, 1);
 insert into person (email, first_name, lastname, last_logged_in_at, address, state, city, zip_code, gpa, type, is_deleted, user_id, major_id) values ('jdillingham2@nature.com', 'Joy', 'Dillingham', '2022-02-14T02:39:16Z', '7 Twin Pines Way', 'Texas', 'San Antonio', '78230', 3.7, 'student', false, 3, 1);
@@ -88,18 +115,6 @@ VALUES('faculty','IBM', 'Texas','Austin','401k', 'Traject Data powers business i
 INSERT INTO job_advertisement(created_by, company, state, city, benefit, description, posted, salary, title)
 VALUES('faculty','Woongjin Inc', 'New Jersey','Ridgefield Park','401k', 'Signify Technology is partnered with a client who is seeking a Frontend Software Developer to join their team! Successful candidates will have the ability to make an immediate impact in delivering highly scalable solutions as our client continues to expand their userbase and service offerings.', '2022-07-08 18:22:49.828', 200000, 'Frontend Developer');
 
-INSERT INTO tag("name")VALUES('javascript');
-INSERT INTO tag("name")VALUES('java');
-INSERT INTO tag("name")VALUES('front-end');
-INSERT INTO tag("name")VALUES('back-end');
-INSERT INTO tag("name")VALUES('rest-api');
-INSERT INTO tag("name")VALUES('python');
-INSERT INTO tag("name")VALUES('security');
-INSERT INTO tag("name")VALUES('ux-ui');
-INSERT INTO tag("name")VALUES('web-development');
-INSERT INTO tag("name")VALUES('react');
-INSERT INTO tag("name")VALUES('spring-boot');
-
 
 INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(1,1);
 INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(1,3);
@@ -131,3 +146,4 @@ INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(11,6);
 INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(12,1);
 INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(12,2);
 INSERT INTO job_advertisement_tags(advertisements_id, tags_id)VALUES(12,3);
+

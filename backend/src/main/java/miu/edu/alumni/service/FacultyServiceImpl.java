@@ -1,10 +1,7 @@
 package miu.edu.alumni.service;
 
 import lombok.RequiredArgsConstructor;
-import miu.edu.alumni.model.Department;
-import miu.edu.alumni.model.Faculty;
-import miu.edu.alumni.model.JobAdvertisement;
-import miu.edu.alumni.model.Tag;
+import miu.edu.alumni.model.*;
 import miu.edu.alumni.repository.DepartmentRepository;
 import miu.edu.alumni.repository.FacultyRepository;
 import org.keycloak.representations.idm.RoleRepresentation;
@@ -39,6 +36,11 @@ public class FacultyServiceImpl implements FacultyService {
     @Override
     public Optional<Faculty> findByUserId(String id) {
         return repository.findByUserId(id);
+    }
+
+    @Override
+    public Optional<Faculty> findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 
     @Override
